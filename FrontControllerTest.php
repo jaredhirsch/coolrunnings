@@ -2,11 +2,26 @@
 
 require_once 'simpletest/autorun.php';
 require_once 'FrontController.php';
-require_once 'AbsolutelyCool.php';
 
 class AbsolutelyCoolStub extends AbsolutelyCool
 {
+    public $inputArray;
+
     
+    /**
+     * runnings - the fake version: instead of 
+     * running a test, just store the input in
+     * a public variable. This allows testing to
+     * be done.
+     * 
+     * @param mixed $inputArray 
+     * @access public
+     * @return void
+     */
+    public function runnings($inputArray)
+    {
+        $this->inputArray = $inputArray;
+    }
 }
 
 class FrontControllerTest extends UnitTestCase
