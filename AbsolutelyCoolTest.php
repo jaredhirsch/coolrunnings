@@ -61,7 +61,7 @@ class AbsolutelyCoolTest extends UnitTestCase
                         'background-color' => 'red');
 
         $ac = new AbsolutelyCool;
-        $redBackgroundCanvas = $ac->generateCanvas($redBox);
+        $redCanvas = $ac->generateCanvas($redBox);
 
         $blueImageParameters = array('url' => 'bluebox.png',
                                      'top' => 0,
