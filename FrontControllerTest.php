@@ -22,6 +22,7 @@ class AbsolutelyCoolStub extends AbsolutelyCool
     public function runnings($inputArray)
     {
         $this->inputArray = $inputArray;
+        return '/this/is/a/test/path';
     }
 }
 
@@ -81,6 +82,17 @@ class FrontControllerTest extends UnitTestCase
         $frontController->dispatch($expectedArray);
         
         $this->assertEqual($expectedArray, $fakeCr->inputArray);
+    }
+
+    public function testDispatchShouldReturnPathToGeneratedSprite()
+    {
+        $fake = new AbsolutelyCoolStub;
+        $dummyArray = array();
+
+        $fc = new FrontController;
+        $fc->setAbsolutelyCool($fake);
+        $resultPath = $fc->dispatch($dummyArray);
+        $this->assertEqual('/this/is/a/test/path', $resultPath);
     }
 
 }

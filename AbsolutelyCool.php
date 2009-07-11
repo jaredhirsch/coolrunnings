@@ -45,8 +45,10 @@ class AbsolutelyCool
                                         $bigInputArray['images']);
         $commentedSprite = $this->setComments($sprite,
                                     $bigInputArray['canvas']['comments']);
-        $this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite);
-        return $this;
+        if($this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite)) {
+            return $this->fileSavePath . 
+                $bigInputArray['canvas']['name'] . '.png';
+        }
     }
 
     protected $fileSavePath = '';
