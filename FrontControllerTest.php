@@ -37,7 +37,6 @@ class FrontControllerTest extends UnitTestCase
 
     public function testShouldPassDecodedInputToCoolRunnings()
     {
-        $expectedAsJson = '{"canvas":{"name":"my-awesome-numbered-img-123","height":50,"width":50,"background-color":"green","comments":"IT IS YOUR BIRTHDAY, IMAGE."},"images":[{"url":"bluebox.png","top":0,"left":0},{"url":"redbox.png","top":0,"left":0}]}';
         $expectedArray = array(
             'canvas' => array('name' => 'my-awesome-numbered-img-123',
                               'height' => 50,
