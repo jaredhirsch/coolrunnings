@@ -48,8 +48,15 @@ class AbsolutelyCool
         return $commentedSprite;
     }
 
+    protected $fileSavePath = '';
+
+    public function setSavePath($path)
+    {
+        $this->fileSavePath = $path;
+    }
     public function saveSpriteAs($filename, Imagick $sprite)
     {
+        $filename = $this->fileSavePath . $filename . '.png';
         return $sprite->writeImage($filename);
     }
 }
