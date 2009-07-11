@@ -6,4 +6,11 @@ class FrontController
     {
         return json_decode($inputAsJson, true);
     }
+
+    protected $absolutelyCool;
+
+    public function setAbsolutelyCool($aCoolObject)
+    {
+        $this->absolutelyCool = $aCoolObject;
+    }
 }
