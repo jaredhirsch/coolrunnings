@@ -12,13 +12,18 @@ class AbsolutelyCool
         return $canvas;
     }
 
-    public function generateSprite(Imagick $canvas, $imageParameters)
+    public function generateSprite(Imagick $canvas, $allImages)
     {
-        $imageToAdd = new Imagick($imageParameters['url']);
-        $canvas->compositeImage($imageToAdd, 
-                                imagick::COMPOSITE_OVER,
-                                $xOffset = $imageParameters['left'],
-                                $yOffset = $imageParameters['top']);
+        foreach ($allImages as $imageParameters) {
+            $imageToAdd = new Imagick($imageParameters['url']);
+            $canvas->compositeImage($imageToAdd, 
+                                    imagick::COMPOSITE_OVER,
+                                    $xOffset = $imageParameters['left'],
+                                    $yOffset = $imageParameters['top']);
+            $imageToAdd->clear();
+            $imageToAdd->destroy();
+        }
+
         return $canvas;
     }
 }
