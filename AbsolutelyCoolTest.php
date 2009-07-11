@@ -145,4 +145,28 @@ class AbsolutelyCoolTest extends UnitTestCase
         $returnedComment = $ac->getComments($canvas);
         $this->assertEqual($additionalComment, $returnedComment);
     }
+
+    public function testShouldBeAbleToPassEverythingAtOnce()
+    {
+        $ac = new AbsolutelyCool;
+        $completeArray = array(
+
+            'canvas' => array('name' => 'my-awesome-numbered-img-123',
+                              'height' => 50,
+                              'width'  => 50,
+                              'background-color' => 'green',
+                              'comments' => 'IT IS YOUR BIRTHDAY, IMAGE.'),
+                              
+            'smiley' => array('url'  => 'http://example.com/smiley.png',
+                              'top'  => 10,
+                              'left' => 10),
+
+            'frowny' => array('url'  => 'http://example.com/frowny.png',
+                              'top'  => 10,
+                              'left' => 20));
+        //$sprite = $ac->runnings($completeArray);
+
+
+                                            
+    }
 }
