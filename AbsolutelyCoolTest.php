@@ -200,7 +200,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         $testFile = dirname(__FILE__) . '/public_images/testfile.png';
 
         if (file_exists($testFile)) {
-            delete($testFile);
+            unlink($testFile);
         }
         clearstatcache();
 
@@ -210,5 +210,12 @@ class AbsolutelyCoolTest extends UnitTestCase
 
         $this->assertTrue(file_exists($testFile));
 
+        // but is the saved sprite the same?
+        $saved = new Imagick($testFile);
+        $original = new Imagick('bluebox.png');
+        $comparisonArray = $original->compareImages($saved,
+                                        imagick::METRIC_MEANSQUAREERROR);
+        $imageDifferenceMetric = $comparisonArray[1];
+        $this->assertTrue($imageDifferenceMetric == 0);
     }
 }
