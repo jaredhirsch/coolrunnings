@@ -95,4 +95,14 @@ class FrontControllerTest extends UnitTestCase
         $this->assertEqual('/this/is/a/test/path', $resultPath);
     }
 
+    public function testResponseShouldBeJsonPathToGeneratedSprite()
+    {
+        $fc = new FrontController;
+        $output = $fc->responseAsJson(array('url' => 
+                                        'http://example.com/foo.png'));
+        $expectedOutput = '{"url":"http:\/\/example.com\/foo.png"}';
+        $this->assertEqual($expectedOutput, $output);
+
+    }
+
 }

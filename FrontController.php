@@ -7,6 +7,11 @@ class FrontController
         return json_decode($inputAsJson, true);
     }
 
+    public function responseAsJson($responseArray)
+    {
+        return json_encode($responseArray);
+    }
+
     protected $absolutelyCool;
 
     public function setAbsolutelyCool($aCoolObject)
