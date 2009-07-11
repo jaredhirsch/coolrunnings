@@ -200,6 +200,9 @@ class AbsolutelyCoolTest extends UnitTestCase
         $this->assertTrue($imageDiffValue == 0);
 
 
+        if (file_exists($spriteSavePath . 'spritemazing_123.png')) {
+            unlink($spriteSavePath . 'spritemazing_123.png');
+        }
                                             
     }
 
