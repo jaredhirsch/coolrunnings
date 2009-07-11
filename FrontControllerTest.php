@@ -12,4 +12,9 @@ class FrontControllerTest extends UnitTestCase
         $decodedRequest = $frontController->decodeRequest($_GET['absolute']);
         $this->assertEqual('bar', $decodedRequest['foo']);
     }
+
+    public function testShouldPassDecodedInputToCoolRunnings()
+    {
+        
+    }
 }
