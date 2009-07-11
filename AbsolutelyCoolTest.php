@@ -218,4 +218,24 @@ class AbsolutelyCoolTest extends UnitTestCase
         $imageDifferenceMetric = $comparisonArray[1];
         $this->assertTrue($imageDifferenceMetric == 0);
     }
+
+    public function testShouldSaveCommentsWhenSpriteIsSaved()
+    {
+        $testFilePath = dirname(__FILE__) . '/public_images/';
+        $testFile = dirname(__FILE__) . '/public_images/testfile.png';
+
+        if (file_exists($testFile)) {
+            unlink($testFile);
+        }
+        clearstatcache();
+
+        $ac = new AbsolutelyCool;
+        $commented = $ac->setComments(new Imagick('bluebox.png'), 
+                                        'some silly comment');
+        $ac->saveSpriteAs($testFile, $commented);
+        $saved = new Imagick($testFile);
+        $this->assertEqual('some silly comment',
+                            $ac->getComments($saved));
+        
+    }
 }
