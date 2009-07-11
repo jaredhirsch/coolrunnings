@@ -217,6 +217,9 @@ class AbsolutelyCoolTest extends UnitTestCase
                                         imagick::METRIC_MEANSQUAREERROR);
         $imageDifferenceMetric = $comparisonArray[1];
         $this->assertTrue($imageDifferenceMetric == 0);
+        if (file_exists($testFile)) {
+            unlink($testFile);
+        }
     }
 
     public function testShouldSaveCommentsWhenSpriteIsSaved()
@@ -236,6 +239,9 @@ class AbsolutelyCoolTest extends UnitTestCase
         $saved = new Imagick($testFile);
         $this->assertEqual('some silly comment',
                             $ac->getComments($saved));
-        
+
+        if (file_exists($testFile)) {
+            unlink($testFile);
+        }
     }
 }
