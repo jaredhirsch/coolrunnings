@@ -236,7 +236,8 @@ class AbsolutelyCoolTest extends UnitTestCase
         $ac = new AbsolutelyCool;
         $commented = $ac->setComments(new Imagick('bluebox.png'), 
                                         'some silly comment');
-        $ac->saveSpriteAs($testFile, $commented);
+        $ac->setSavePath($testFilePath);
+        $ac->saveSpriteAs('testfile', $commented);
         $saved = new Imagick($testFile);
         $this->assertEqual('some silly comment',
                             $ac->getComments($saved));
