@@ -7,11 +7,7 @@ class AbsolutelyCoolTest extends UnitTestCase
 {
     public function setUp()
     {
-        $this->bluebox = new Imagick();
-        $this->bluebox->newImage($width  = '50', 
-                                 $height = '50',
-                                 $backgroundColor = 'blue', 
-                                 $format = 'png');
+        $this->bluebox = new Imagick('bluebox.png');
     }
 
     public function tearDown()
@@ -50,5 +46,22 @@ class AbsolutelyCoolTest extends UnitTestCase
 
         $this->assertEqual('100', $outputImage->getImageWidth());
         $this->assertEqual('50', $outputImage->getImageHeight());
+    }
+
+    public function testShouldPutSpritesOnTopOfBackgroundCanvas()
+    {
+        // given a background of some size, and a "sprite" 
+        // of exactly the same size, if we overlay the sprite
+        // on the background, the background should be invisible.
+        // so comparing with the original sprite should work.
+
+        // we'll use the blue box as the overlaid thing.
+        $redBox = array('height' => '50',
+                        'width' => '50',
+                        'background-color' => 'red');
+
+        $ac = new AbsolutelyCool;
+        $redBackgroundCanvas = $ac->generateCanvas($redBox);
+        
     }
 }
