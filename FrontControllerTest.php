@@ -78,7 +78,7 @@ class FrontControllerTest extends UnitTestCase
         
         $frontController = new FrontController();
         $frontController->setAbsolutelyCool($fakeCr);
-        $throwawayResponse = $frontController->dispatch($expectedArray);
+        $frontController->dispatch($expectedArray);
         
         $this->assertEqual($expectedArray, $fakeCr->inputArray);
     }

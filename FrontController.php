@@ -16,7 +16,6 @@ class FrontController
 
     public function dispatch($inputAsArray)
     {
-        $generatedSprite = $this->absolutelyCool->runnings($inputAsArray);
-        return $generatedSprite;
+        $this->absolutelyCool->runnings($inputAsArray);
     }
 }
