@@ -205,7 +205,8 @@ class AbsolutelyCoolTest extends UnitTestCase
         clearstatcache();
 
         $ac = new AbsolutelyCool;
-        $this->assertTrue($ac->saveSpriteAs($testFile, 
+        $ac->setSavePath($testFilePath);
+        $this->assertTrue($ac->saveSpriteAs('testfile', 
                                 new Imagick('bluebox.png')));
 
         $this->assertTrue(file_exists($testFile));
