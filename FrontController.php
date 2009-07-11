@@ -7,9 +7,29 @@ class FrontController
         return json_decode($inputAsJson, true);
     }
 
-    public function responseAsJson($responseArray)
+    protected $webRootDirectory;
+    public function setWebRoot($rootDir)
     {
-        return json_encode($responseArray);
+        $this->webRootDirectory = $rootDir;
+    }
+
+    protected $rootUrl;
+    public function setRootUrl($rootUrl)
+    {
+        $this->rootUrl = $rootUrl;
+    }
+
+    public function responseAsJson($responseAsArray)
+    {
+        return json_encode($responseAsArray);
+    }
+
+    public function constructResponse($responsePath)
+    {
+        $filteredResponse = str_replace($this->webRootDirectory,
+                                    $this->rootUrl,
+                                    $responsePath);
+        return array('url' => $filteredResponse);
     }
 
     protected $absolutelyCool;
