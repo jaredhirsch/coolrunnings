@@ -37,4 +37,14 @@ class AbsolutelyCool
     {
         return $canvas->getImageProperty('comment');
     }
+
+    public function runnings($bigInputArray)
+    {
+        $blankCanvas = $this->generateCanvas($bigInputArray['canvas']);
+        $sprite = $this->generateSprite($blankCanvas, 
+                                        $bigInputArray['images']);
+        $commentedSprite = $this->setComments($sprite,
+                                    $bigInputArray['canvas']['comments']);
+        return $commentedSprite;
+    }
 }
