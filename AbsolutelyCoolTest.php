@@ -16,7 +16,12 @@ class AbsolutelyCoolTest extends UnitTestCase
         $ac = new AbsolutelyCool;
         $outputImage = $ac->generateCanvas($output);
 
-        $blueBox = new Imagick('
+        $blueBox = new Imagick('bluebox.png');
+        $imageComparison = $blueBox->compareImage($outputImage,
+                                            imagick::METRIC_MEANSQUAREERROR);
+        $imageDifferenceMetric = $imageComparison[1];
+
+        $this->assertTrue($imageDifferenceMetric === 0);
                                     
     }
 }
