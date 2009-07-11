@@ -193,4 +193,17 @@ class AbsolutelyCoolTest extends UnitTestCase
 
                                             
     }
+
+    public function testShouldWriteGeneratedSpriteToFile()
+    {
+        if (file_exists('public_images/testfile.png')) {
+            delete('public_images/testfile.png');
+        }
+
+        $ac = new AbsolutelyCool;
+        $ac->setOutputPath('public_images');
+        $ac->saveSpriteAs('testfile.png', new Imagick('bluebox.png'));
+
+
+    }
 }

@@ -47,4 +47,17 @@ class AbsolutelyCool
                                     $bigInputArray['canvas']['comments']);
         return $commentedSprite;
     }
+
+    /**
+     * outputPath: path to save generated sprites
+     * 
+     * @var mixed
+     * @access protected
+     */
+    protected $outputPath;
+
+    public function setOutputPath($path)
+    {
+        $this->outputPath = $path;
+    }
 }
