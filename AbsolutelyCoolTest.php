@@ -196,14 +196,19 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testShouldWriteGeneratedSpriteToFile()
     {
-        if (file_exists('public_images/testfile.png')) {
-            delete('public_images/testfile.png');
+        $testFilePath = dirname(__FILE__) . '/public_images/';
+        $testFile = dirname(__FILE__) . '/public_images/testfile.png';
+
+        if (file_exists($testFile)) {
+            delete($testFile);
         }
+        clearstatcache();
 
         $ac = new AbsolutelyCool;
-        $ac->setOutputPath('public_images');
-        $ac->saveSpriteAs('testfile.png', new Imagick('bluebox.png'));
+        $this->assertTrue($ac->saveSpriteAs($testFile, 
+                                new Imagick('bluebox.png')));
 
+        $this->assertTrue(file_exists($testFile));
 
     }
 }
