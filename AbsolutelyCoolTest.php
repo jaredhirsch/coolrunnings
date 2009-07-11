@@ -114,4 +114,18 @@ class AbsolutelyCoolTest extends UnitTestCase
         $this->assertTrue($imageDiffMetric == 0);
 
     }
+
+    public function testShouldBeAbleToSetAndGetSpriteComments()
+    {
+        $ac = new AbsolutelyCool;
+        $canvas = $ac->generateCanvas(array('height' => 50, 
+                                            'width' => 50,
+                                            'background-color' => 'black'));
+        
+        $inputComment = 'IT IS YOUR BIRTHDAY.';
+        
+        $canvas = $ac->setComments($canvas, $comment);
+        $returnedComments = $ac->getComments($canvas);
+        $this->assertEqual($inputComment, $returnedComment);
+    }
 }
