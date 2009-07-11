@@ -87,6 +87,31 @@ class AbsolutelyCoolTest extends UnitTestCase
         // this test will get us multiple sprites, so probably
         // some kind of loop.
 
+        $redRectangle = array('height' => 50,
+                              'width'  => 100,
+                              'background-color' => 'red');
+        $ac = new AbsolutelyCool;
+        $redRectangleCanvas = $ac->generateCanvas($redRectangle);
+        
+        $blueBox = array('url' => 'bluebox.png',
+                         'top' => 0,
+                         'left' => 0);
+        $otherBlueBox = array('url' => 'bluebox.png',
+                              'top' => 0,
+                              'left' => 50);
+
+        $sprite = $ac->generateSprite($redRectangleCanvas,
+                                        array($blueBox, $otherBlueBox));
+
+        $blueRectangle = new Imagick();
+        $blueRectangle->newImage($width = 100, $height = 50, 
+                                $backgroundColor = 'blue', $format = 'png');
+
+        $compared = $blueRectangle->compareImages($sprite, 
+                                        imagick::METRIC_MEANSQUAREERROR);
+        $imageDiffMetric = $compared[1];
+
+        $this->assertTrue($imageDiffMetric == 0);
 
     }
 }
