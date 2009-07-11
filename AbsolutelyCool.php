@@ -48,22 +48,8 @@ class AbsolutelyCool
         return $commentedSprite;
     }
 
-    /**
-     * outputPath: path to save generated sprites
-     * 
-     * @var mixed
-     * @access protected
-     */
-    protected $outputPath;
-
-    public function setOutputPath($path)
-    {
-        $this->outputPath = $path;
-    }
-
     public function saveSpriteAs($filename, Imagick $sprite)
     {
-        // I don't even know what to do with all these side-effects...
         return $sprite->writeImage($filename);
     }
 }
