@@ -1,4 +1,6 @@
 <?php
+// had to add this because simpletest sends headers by default...
+ob_start();
 
 require_once 'simpletest/autorun.php';
 require_once 'FrontController.php';
@@ -102,7 +104,16 @@ class FrontControllerTest extends UnitTestCase
                                         'http://example.com/foo.png'));
         $expectedOutput = '{"url":"http:\/\/example.com\/foo.png"}';
         $this->assertEqual($expectedOutput, $output);
+    }
 
+    public function testReallyCaptureAndExamineResponse()
+    {
+        $fc = new FrontController;
+        $someJson = '{"foo":"bar"}';
+        ob_start();
+        $fc->sendResponse($someJson);
+        $responseDocument = ob_get_clean();
+        $this->assertEqual($someJson, $responseDocument);
     }
 
 }

@@ -25,4 +25,10 @@ class FrontController
         $pathToGeneratedSprite = $this->absolutelyCool->runnings($inputAsArray);
         return $pathToGeneratedSprite;
     }
+
+    public function sendResponse($response)
+    {
+        header('Content-type: application/json');
+        echo $response;
+    }
 }
