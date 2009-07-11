@@ -2,6 +2,7 @@
 
 require_once 'simpletest/autorun.php';
 require_once 'FrontController.php';
+require_once 'AbsolutelyCool.php';
 
 class AbsolutelyCoolStub extends AbsolutelyCool
 {
