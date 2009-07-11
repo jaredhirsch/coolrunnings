@@ -146,6 +146,16 @@ class AbsolutelyCoolTest extends UnitTestCase
         $this->assertEqual($additionalComment, $returnedComment);
     }
 
+    public function testShouldBeAbleToGetAndSetCommentsOnAnExistingFile()
+    {
+        $ac = new AbsolutelyCool;
+        $commented = $ac->setComments(new Imagick('bluebox.png'), 
+                                'comments on a blue box');
+        $retrievedComment = $ac->getComments($commented);
+
+        $this->assertEqual('comments on a blue box', $retrievedComment);
+    }
+
     public function testShouldBeAbleToPassEverythingAtOnce()
     {
         $absolutelyCool = new AbsolutelyCool;
