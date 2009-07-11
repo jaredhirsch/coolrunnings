@@ -128,4 +128,21 @@ class AbsolutelyCoolTest extends UnitTestCase
         $returnedComment = $ac->getComments($canvas);
         $this->assertEqual($inputComment, $returnedComment);
     }
+
+    public function testSetCommentsShouldReplaceNotAppend()
+    {
+        $ac = new AbsolutelyCool;
+        $canvas = $ac->generateCanvas(array('height' => 50, 
+                                            'width' => 50,
+                                            'background-color' => 'black'));
+        
+        $firstComment = 'IT IS YOUR BIRTHDAY.';
+        $canvas = $ac->setComments($canvas, $firstComment);
+
+        $additionalComment = 'IT IS NOT YOUR BIRTHDAY.';
+        $canvas = $ac->setComments($canvas, $additionalComment);
+
+        $returnedComment = $ac->getComments($canvas);
+        $this->assertEqual($additionalComment, $returnedComment);
+    }
 }
