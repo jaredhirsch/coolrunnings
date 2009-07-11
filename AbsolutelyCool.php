@@ -26,4 +26,15 @@ class AbsolutelyCool
 
         return $canvas;
     }
+
+    public function setComments(Imagick $canvas, $comments)
+    {
+        $canvas->commentImage($comments);
+        return $canvas;
+    }
+
+    public function getComments(Imagick $canvas)
+    {
+        return $canvas->getImageProperty('comment');
+    }
 }

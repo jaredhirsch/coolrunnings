@@ -124,8 +124,8 @@ class AbsolutelyCoolTest extends UnitTestCase
         
         $inputComment = 'IT IS YOUR BIRTHDAY.';
         
-        $canvas = $ac->setComments($canvas, $comment);
-        $returnedComments = $ac->getComments($canvas);
+        $canvas = $ac->setComments($canvas, $inputComment);
+        $returnedComment = $ac->getComments($canvas);
         $this->assertEqual($inputComment, $returnedComment);
     }
 }
