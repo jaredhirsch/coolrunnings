@@ -62,6 +62,16 @@ class AbsolutelyCoolTest extends UnitTestCase
 
         $ac = new AbsolutelyCool;
         $redBackgroundCanvas = $ac->generateCanvas($redBox);
+
+        $blueImageParameters = array('url' => 'bluebox.png',
+                                     'top' => 0,
+                                     'left' => 0);
+
+        $sprite = $ac->generateSprite($redCanvas, $blueImageParameters);
         
+        $imageComparison = $sprite->compareImages($this->bluebox,
+                                            imagick::METRIC_MEANSQUAREERROR);
+        $imageDiffMetric = $imageComparison[1];
+        $this->assertTrue($imageDiffMetric == 0);
     }
 }
