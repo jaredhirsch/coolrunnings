@@ -45,6 +45,7 @@ class AbsolutelyCool
                                         $bigInputArray['images']);
         $commentedSprite = $this->setComments($sprite,
                                     $bigInputArray['canvas']['comments']);
+        $this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite);
         return $commentedSprite;
     }
 
