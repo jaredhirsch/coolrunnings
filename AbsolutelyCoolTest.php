@@ -74,4 +74,19 @@ class AbsolutelyCoolTest extends UnitTestCase
         $imageDiffMetric = $imageComparison[1];
         $this->assertTrue($imageDiffMetric == 0);
     }
+
+    public function testShouldPlaceTwoSpritesSideBySide()
+    {
+        // make a red rectangular canvas, 100 wide and 50 high.
+        // overlay two blue squares, 50 x 50, over the rectangle
+        // with one having a 50 pixel x-offset. 
+        // if the sprite generator is working, the resulting
+        // sprite should be identical to a blue rectangle
+        // that's 100 wide and 50 high.
+
+        // this test will get us multiple sprites, so probably
+        // some kind of loop.
+
+
+    }
 }
