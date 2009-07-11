@@ -116,4 +116,15 @@ class FrontControllerTest extends UnitTestCase
         $this->assertEqual($someJson, $responseDocument);
     }
 
+    public function testEmittedJsonLinkMustBeUrlNotFilesystemLink()
+    {
+        $fc = new FrontController;
+        $fc->setSavePath('/var/www/html/public_images/');
+        $fc->setWebRoot('/var/www/html/', 'http://example.com/');
+        $output = $fc->responseAsJson(array('url' => '/var/www/html/public_images/testfile.png'));
+        
+        $this->assertEqual('{"url":"http://example.com/public_images/testfile.png"}', $output);
+
+    }
+
 }
