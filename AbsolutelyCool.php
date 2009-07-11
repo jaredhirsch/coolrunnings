@@ -11,4 +11,14 @@ class AbsolutelyCool
                           $fileFormat = 'png');
         return $canvas;
     }
+
+    public function generateSprite(Imagick $canvas, $imageParameters)
+    {
+        $imageToAdd = new Imagick($imageParameters['url']);
+        $canvas->compositeImage($imageToAdd, 
+                                imagick::COMPOSITE_OVER,
+                                $xOffset = $imageParameters['left'],
+                                $yOffset = $imageParameters['top']);
+        return $canvas;
+    }
 }
