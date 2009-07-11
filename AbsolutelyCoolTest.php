@@ -67,7 +67,7 @@ class AbsolutelyCoolTest extends UnitTestCase
                                      'top' => 0,
                                      'left' => 0);
 
-        $sprite = $ac->generateSprite($redCanvas, $blueImageParameters);
+        $sprite = $ac->generateSprite($redCanvas, array($blueImageParameters));
         
         $imageComparison = $sprite->compareImages($this->bluebox,
                                             imagick::METRIC_MEANSQUAREERROR);
