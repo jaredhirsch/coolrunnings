@@ -148,23 +148,37 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testShouldBeAbleToPassEverythingAtOnce()
     {
-        $ac = new AbsolutelyCool;
+        $absolutelyCool = new AbsolutelyCool;
         $completeArray = array(
 
             'canvas' => array('name' => 'my-awesome-numbered-img-123',
                               'height' => 50,
                               'width'  => 50,
                               'background-color' => 'green',
-                              'comments' => 'IT IS YOUR BIRTHDAY, IMAGE.'),
-                              
-            'smiley' => array('url'  => 'http://example.com/smiley.png',
-                              'top'  => 10,
-                              'left' => 10),
+                              'comments' => 'IT IS YOUR BIRTHDAY, IMAGE.'),  
+            
+            'images' => array(
+                            array('url'  => 'bluebox.png',
+                              'top'  => 0,
+                              'left' => 0),
+                            array('url'  => 'redbox.png',
+                              'top'  => 0,
+                              'left' => 0)));
 
-            'frowny' => array('url'  => 'http://example.com/frowny.png',
-                              'top'  => 10,
-                              'left' => 20));
-        //$sprite = $ac->runnings($completeArray);
+                  // todo: refactor API when I'm fresh...
+                  // at least the pun is amusing for the moment
+        $sprite = $absolutelyCool->runnings($completeArray);
+        $this->assertEqual('IT IS YOUR BIRTHDAY, IMAGE.',
+                           $absolutelyCool->getComments($sprite));
+        
+        // same old image comparison deal. 
+        // expect the sprite to be a red box.
+        $red = new Imagick('redbox.png');
+        $comparison = $red->compareImages($sprite, 
+                                        imagick::METRIC_MEANSQUAREERROR);
+        $imageDiffValue = $comparison[1];
+
+        $this->assertTrue($imageDiffValue == 0);
 
 
                                             
