@@ -36,4 +36,19 @@ class AbsolutelyCoolTest extends UnitTestCase
         $imageDiffMetric = $imageComparison[1];
         $this->assertTrue($imageDiffMetric == 0);
     }
+
+    public function testShouldCreateCanvasWithCorrectDimensions()
+    {
+        $output = array('name' => 'myBlankTestImage.png',
+                        'height' => '50',
+                        'width' => '50',
+                        'background-color' => 'blue',
+                        'comments' => 'these comments are quite lame');
+
+        $ac = new AbsolutelyCool;
+        $outputImage = $ac->generateCanvas($output);
+
+        $this->assertEqual('50', $outputImage->getImageWidth());
+        $this->assertEqual('50', $outputImage->getImageHeight());
+    }
 }
