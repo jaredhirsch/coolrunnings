@@ -1,27 +1,39 @@
 <?php
 
 require_once 'simpletest/autorun.php';
+require_once 'AbsolutelyCool.php';
 
 class AbsolutelyCoolTest extends UnitTestCase
 {
+    public function setUp()
+    {
+        $this->bluebox = new Imagick();
+        $this->bluebox->newImage($width  = '50', 
+                                 $height = '50',
+                                 $backgroundColor = 'blue', 
+                                 $format = 'png');
+    }
+
+    public function tearDown()
+    {
+        $this->bluebox->clear();
+        $this->bluebox->destroy();
+    }
+
     public function testShouldCreateBlankImageGivenOutputParameterArray()
     {
-        $output = array('output' => 
-                    array('name' => 'myBlankTestImage.png',
+        $output = array('name' => 'myBlankTestImage.png',
                         'height' => '50',
                         'width' => '50',
-                        'backgroundColor' => 'blue',
-                        'comments' => 'these comments are quite lame'));
+                        'background-color' => 'blue',
+                        'comments' => 'these comments are quite lame');
 
         $ac = new AbsolutelyCool;
         $outputImage = $ac->generateCanvas($output);
 
-        $blueBox = new Imagick('bluebox.png');
-        $imageComparison = $blueBox->compareImage($outputImage,
+        $imageComparison = $outputImage->compareImages($this->bluebox, 
                                             imagick::METRIC_MEANSQUAREERROR);
-        $imageDifferenceMetric = $imageComparison[1];
-
-        $this->assertTrue($imageDifferenceMetric === 0);
-                                    
+        $imageDiffMetric = $imageComparison[1];
+        $this->assertTrue($imageDiffMetric == 0);
     }
 }
