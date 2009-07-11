@@ -41,14 +41,14 @@ class AbsolutelyCoolTest extends UnitTestCase
     {
         $output = array('name' => 'myBlankTestImage.png',
                         'height' => '50',
-                        'width' => '50',
+                        'width' => '100',
                         'background-color' => 'blue',
                         'comments' => 'these comments are quite lame');
 
         $ac = new AbsolutelyCool;
         $outputImage = $ac->generateCanvas($output);
 
-        $this->assertEqual('50', $outputImage->getImageWidth());
+        $this->assertEqual('100', $outputImage->getImageWidth());
         $this->assertEqual('50', $outputImage->getImageHeight());
     }
 }
