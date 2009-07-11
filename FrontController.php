@@ -12,10 +12,12 @@ class FrontController
     public function setAbsolutelyCool($aCoolObject)
     {
         $this->absolutelyCool = $aCoolObject;
+        return $this;
     }
 
     public function dispatch($inputAsArray)
     {
         $this->absolutelyCool->runnings($inputAsArray);
+        return $this;
     }
 }
