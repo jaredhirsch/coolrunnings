@@ -161,7 +161,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         $absolutelyCool = new AbsolutelyCool;
         $completeArray = array(
 
-            'canvas' => array('name' => 'my-awesome-numbered-img-123',
+            'canvas' => array('name' => 'spritemazing_123',
                               'height' => 50,
                               'width'  => 50,
                               'background-color' => 'green',
@@ -177,7 +177,16 @@ class AbsolutelyCoolTest extends UnitTestCase
 
                   // todo: refactor API when I'm fresh...
                   // at least the pun is amusing for the moment
-        $sprite = $absolutelyCool->runnings($completeArray);
+        $spriteSavePath = dirname(__FILE__) . '/public_images/';
+        $absolutelyCool->setSavePath($spriteSavePath);
+        
+        // maybe ac should work by side-effects here and return itself...
+        $absolutelyCool->runnings($completeArray);
+
+        // so we are now asserting against the sprite
+        // which was saved to disk as a side effect
+
+        $sprite = new Imagick($spriteSavePath . 'spritemazing_123.png');
         $this->assertEqual('IT IS YOUR BIRTHDAY, IMAGE.',
                            $absolutelyCool->getComments($sprite));
         
