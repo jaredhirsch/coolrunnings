@@ -258,4 +258,32 @@ class AbsolutelyCoolTest extends UnitTestCase
             unlink($testFile);
         }
     }
+
+    public function testShouldDownloadRemoteImagesCorrectly()
+    {
+        // this one is tough to test. We need a permanent image.
+        // the archive is as close as the web gets to permanent.
+
+        // begin by ensuring the file doesn't exist from earlier attempts.
+        if (file_exists(dirname(__FILE__) . '/public_images/' 
+                            . 'local_copy.png')) {
+            unlink(dirname(__FILE__) . '/public_images/' . 'local_copy.png');
+        }
+
+        $ac = new AbsolutelyCool;
+        $ac->setSavePath(dirname(__FILE__) . '/public_images/');
+        $localCopy = $ac->getLocalCopyOfImage('http://web.archive.org/web/20070610093230/www.libpng.org/pub/png/img_png/pngbook-cover-micro.png', 'local_copy.png');
+        $this->assertTrue(file_exists($localCopy));
+
+        // at this point, we assume we did save a file.
+        // but let's use Imagick's compareImages to ensure
+        // the downloaded image matches a copy we added 
+        // earlier manually.
+        $localCopyImagick = new Imagick($localCopy);
+        $expectedImage = new Imagick(dirname(__FILE__) . '/pngbook-cover-micro.png');
+        $comparisonArray =  $expectedImage->compareImages($localCopyImagick,
+                                            imagick::METRIC_MEANSQUAREERROR);
+        $difference = $comparisonArray[1];
+        $this->assertEqual(0, $difference);
+    }
 }

@@ -15,7 +15,8 @@ class AbsolutelyCool
     public function generateSprite(Imagick $canvas, $allImages)
     {
         foreach ($allImages as $imageParameters) {
-            $localImage = $this->getLocalCopyOfImage($imageParameters['url']);
+            $localImage = $this->getLocalCopyOfImage($imageParameters['url'],
+                                                $localTempFile = microtime() . '.png');
             $imageToAdd = new Imagick($localImage);
             $canvas->compositeImage($imageToAdd, 
                                     imagick::COMPOSITE_OVER,
@@ -62,5 +63,15 @@ class AbsolutelyCool
     {
         $filename = $this->fileSavePath . $filename . '.png';
         return $sprite->writeImage($filename);
+    }
+
+    public function getLocalCopyOfImage($url, $localFilename)
+    {
+        $file = file_get_contents($url);
+        $completeLocalPath = $this->fileSavePath . $localFilename;
+        $handle = fopen($completeLocalPath, 'w');
+        if (fputs($handle, $file)) {
+            return $this->fileSavePath . $localFilename;
+        }
     }
 }
