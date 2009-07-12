@@ -4,6 +4,7 @@ class FrontController
 {
     public function decodeRequest($inputAsJson)
     {
+        $inputAsJson = stripslashes($inputAsJson);
         return json_decode($inputAsJson, true);
     }
 
