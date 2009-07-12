@@ -12,18 +12,18 @@ require_once 'AbsolutelyCool.php';
     
     $ac = new AbsolutelyCool;
     // I guess we have to set AbsolutelyCool path separately
-    $ac->setSavePath('/var/www/html/');
+    $ac->setSavePath('/var/www/html/coolRunnings/examples/');
 
     $fc->setAbsolutelyCool($ac);
 
     // set some other things we'll need
-    $fc->setWebRoot('/var/www/html/');
-    $fc->setRootUrl('http://www.example.com/');
+    $fc->setWebRoot('/var/www/html/coolRunnings/examples');
+    $fc->setRootUrl('http://localhost/');
 
 
     // now: get request and funnel to AC to generate sprite
     // ac returns path where sprite was saved
-    $expectedAsJson = '{"canvas":{"name":"my-awesome-numbered-img-123","height":50,"width":50,"background-color":"green","comments":"IT IS YOUR BIRTHDAY, IMAGE."},"images":[{"url":"http://localhost/coolRunnings/bluebox.png","top":0,"left":0},{"url":"http://localhost/coolRunnings/redbox.png","top":0,"left":0}]}';
+    $expectedAsJson = '{"canvas":{"name":"my-awesome-numbered-img-123","height":50,"width":50,"background-color":"green","comments":"IT IS YOUR BIRTHDAY, IMAGE."},"images":[{"url":"http://localhost/coolRunnings/examples/bluebox.png","top":0,"left":0},{"url":"http://localhost/coolRunnings/examples/redbox.png","top":0,"left":0}]}';
     $requestAsArray = $fc->decodeRequest($expectedAsJson);
     $localSpritePath = $fc->dispatch($requestAsArray);
 
