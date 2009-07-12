@@ -15,7 +15,8 @@ class AbsolutelyCool
     public function generateSprite(Imagick $canvas, $allImages)
     {
         foreach ($allImages as $imageParameters) {
-            $imageToAdd = new Imagick($imageParameters['url']);
+            $localImage = $this->getLocalCopyOfImage($imageParameters['url']);
+            $imageToAdd = new Imagick($localImage);
             $canvas->compositeImage($imageToAdd, 
                                     imagick::COMPOSITE_OVER,
                                     $xOffset = $imageParameters['left'],
