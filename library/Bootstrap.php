@@ -23,8 +23,7 @@ require_once 'AbsolutelyCool.php';
 
     // now: get request and funnel to AC to generate sprite
     // ac returns path where sprite was saved
-    $expectedAsJson = '{"canvas":{"name":"my-awesome-numbered-img-123","height":150,"width":150,"background-color":"green","comments":"IT IS YOUR BIRTHDAY, IMAGE."},"images":[{"url":"http://localhost/coolRunnings/public_images/bluebox.png","top":10,"left":10},{"url":"http://localhost/coolRunnings/public_images/redbox.png","top":10,"left":70}]}';
-    $requestAsArray = $fc->decodeRequest($expectedAsJson);
+    $requestAsArray = $fc->decodeRequest($_GET['absolute']);
     $localSpritePath = $fc->dispatch($requestAsArray);
 
     // replace local with web path, stuff into array, 
