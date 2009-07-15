@@ -1,6 +1,7 @@
 <?php
 
 require_once 'simpletest/autorun.php';
+require_once 'Smusher.php';
 
 class SmusherTest extends UnitTestCase
 {
