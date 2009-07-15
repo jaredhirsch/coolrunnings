@@ -17,7 +17,7 @@ class SmusherTest extends UnitTestCase
         $badFile = 'thisFakeFileDoesNotExist.png';
         $smush_it = new Smusher($imageToSmush = $badFile, 
                                 $serviceUrl = $badUrl);
-        //$this->assertFalse($smush_it->isSmushed);
+        $this->assertFalse($smush_it->isSmushed);
         
     }
 }
