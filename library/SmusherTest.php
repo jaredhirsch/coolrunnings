@@ -18,19 +18,15 @@ class SmusherTest extends UnitTestCase
         $badFile = 'thisFakeFileDoesNotExist.png';
         $this->smusher->smush($imageToSmush = $badFile, 
                                 $serviceUrl = $badUrl);
-        $this->assertFalse($smush_it->isSmushed);
+        $this->assertFalse($this->smusher->isSmushed);
         
     }
 
-    public function testShouldCatchExceptionIfSmushitReturnsJsonErrorMessage()
+    public function testShouldMarkImageAsNotSmushedIfSmushFails()
     {
-        // enable error reporting while we're writing the test
-        // so we know what's breaking
-        error_reporting(-1);
+        $error = '{"src":"foo","error":"Could not get the image","id":""}';
+        $this->smusher->examineResponse($error);
 
-        
-        $this->assertFalse($smush_it->isSmushed);
-        $expected = file_get_contents($fakeSmushit . $fakeSmushitContinued);
-        $this->assertEqual($expected, $smush_it->getRawResponse());
+        $this->assertFalse($this->smusher->isSmushed);
     }
 }
