@@ -37,7 +37,6 @@ class SmusherTest extends UnitTestCase
         // this, because smush.it still hosts a copy of
         // the image in this case. 
         
-        error_reporting(E_ERROR);
         $aGoodError = '{"src":"results\/c825409c\/logo.png",' .
                       '"src_size":2722,"error":"No savings",' .
                       '"dest_size":-1,"id":""}';
