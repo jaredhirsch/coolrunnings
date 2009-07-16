@@ -1,6 +1,7 @@
 <?php
 require_once 'FrontController.php';
 require_once 'AbsolutelyCool.php';
+require_once 'Smusher.php';
 // I am reasonably sure this is how it works:
 
     // given a front controller
@@ -12,7 +13,7 @@ require_once 'AbsolutelyCool.php';
     
     $ac = new AbsolutelyCool;
     // I guess we have to set AbsolutelyCool path separately
-    $ac->setSavePath('/var/www/html/coolRunnings/public_images/');
+    $ac->setSavePath('/var/www/html/coolrunnings/public_images/');
 
     $fc->setAbsolutelyCool($ac);
 
@@ -27,8 +28,16 @@ require_once 'AbsolutelyCool.php';
     $localSpritePath = $fc->dispatch($requestAsArray);
 
     // replace local with web path, stuff into array, 
-    // convert into json, and emit!
     $webPathAsArray = $fc->constructResponse($localSpritePath);
+
+	// next, send to smush.it
+	$smush = new Smusher;
+	$smush->smush($webPathAsArray['url']);
+	if ($smush->isSmushed()) {
+		$webPathAsArray['url'] = $smush->getSmushedUrl();
+	}
+
+    // convert into json, and emit!
     $webPathAsJson = $fc->responseAsJson($webPathAsArray);
     //echo 'foo';
     $fc->sendResponse($webPathAsJson);
