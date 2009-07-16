@@ -21,7 +21,7 @@ class Smusher
     }
 
     public function smush($fileToSmush,
-                                $serviceUrl = 'http://smush.it/ws.php?img=')
+                          $serviceUrl = 'http://smush.it/ws.php?img=')
     {
         try {
             $fullPath = $serviceUrl . $fileToSmush;
@@ -31,7 +31,6 @@ class Smusher
         } catch (RuntimeException $e) {
             $this->isSmushed = false;
         }
-
     }
 
     protected $rawResponse;
