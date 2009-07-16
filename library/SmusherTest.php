@@ -41,11 +41,9 @@ class SmusherTest extends UnitTestCase
                       '"src_size":2722,"error":"No savings",' .
                       '"dest_size":-1,"id":""}';
         $this->smusher->examineResponse($aGoodError);
+
         $this->assertTrue($this->smusher->isSmushed());
         $this->assertEqual('http://smush.it/results/c825409c/logo.png',
                            $this->smusher->getSmushedUrl());
-
-
-
     }
 }
