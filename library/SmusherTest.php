@@ -29,4 +29,23 @@ class SmusherTest extends UnitTestCase
 
         $this->assertFalse($this->smusher->isSmushed);
     }
+
+    public function testShouldMarkImageAsSmushedIfSmushCannotSmushFurther()
+    {
+        // if smush.it cannot further compress an image,
+        // it throws an error. but we are still happy with
+        // this, because smush.it still hosts a copy of
+        // the image in this case. 
+        
+        $aGoodError = '{"src":"results\/c825409c\/logo.png",' .
+                      '"src_size":2722,"error":"No savings",' .
+                      '"dest_size":-1,"id":""}';
+        $this->smusher->examineResponse($aGoodError);
+        $this->assertTrue($this->smusher->isSmushed);
+        $this->assertEqual('http://smush.it/results/c825409c/logo.png',
+                           $this->smusher->getSmushedUrl());
+
+
+
+    }
 }
