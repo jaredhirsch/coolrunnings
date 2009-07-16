@@ -45,19 +45,17 @@ class Smusher
     {
         $json = ($response === null) ? $this->rawResponse : $response;
         $responseAsArray = json_decode($json, true);
+
         if ($responseAsArray === null) {
             $this->isSmushed = false;
-            return;
-        }
-
-        if ($responseAsArray['error'] == 'No savings') {
+        } elseif ($responseAsArray['error'] == 'No savings') {
             $this->isSmushed = true;
             $this->smushedUrl = 'http://smush.it/' . $responseAsArray['src'];
-        }
-
-        if (array_key_exists('dest', $responseAsArray)) {
+        } elseif (array_key_exists('dest', $responseAsArray)) {
             $this->isSmushed = true;
             $this->smushedUrl = 'http://smush.it/' . $responseAsArray['dest'];
+        } else {
+            $this->isSmushed = false;
         }
     }
 
