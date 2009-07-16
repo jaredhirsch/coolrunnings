@@ -28,7 +28,7 @@ class SmusherTest extends UnitTestCase
         error_reporting(-1);
         $fakeSmushit = dirname(__FILE__) . '/fixtures/';
         $fakeSmushitContinued = 'smushitFailureResponse.png';
-        $smush_it = new Smusher($fakeSmushit, $fakeSmushitContinued);
+        $smush_it = new Smusher($fakeSmushitContinued, $fakeSmushit);
 
         $this->assertFalse($smush_it->isSmushed);
         $expected = file_get_contents($fakeSmushit . $fakeSmushitContinued);
