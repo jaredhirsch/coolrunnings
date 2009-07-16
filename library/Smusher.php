@@ -54,6 +54,11 @@ class Smusher
             $this->isSmushed = true;
             $this->smushedUrl = 'http://smush.it/' . $responseAsArray['src'];
         }
+
+        if (array_key_exists('dest', $responseAsArray)) {
+            $this->isSmushed = true;
+            $this->smushedUrl = 'http://smush.it/' . $responseAsArray['dest'];
+        }
     }
 
     /**
