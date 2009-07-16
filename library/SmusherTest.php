@@ -18,7 +18,7 @@ class SmusherTest extends UnitTestCase
         $badFile = 'thisFakeFileDoesNotExist.png';
         $this->smusher->smush($imageToSmush = $badFile, 
                                 $serviceUrl = $badUrl);
-        $this->assertFalse($this->smusher->isSmushed);
+        $this->assertFalse($this->smusher->isSmushed());
         
     }
 
@@ -27,7 +27,7 @@ class SmusherTest extends UnitTestCase
         $error = '{"src":"foo","error":"Could not get the image","id":""}';
         $this->smusher->examineResponse($error);
 
-        $this->assertFalse($this->smusher->isSmushed);
+        $this->assertFalse($this->smusher->isSmushed());
     }
 
     public function testShouldMarkImageAsSmushedIfSmushCannotSmushFurther()
@@ -41,7 +41,7 @@ class SmusherTest extends UnitTestCase
                       '"src_size":2722,"error":"No savings",' .
                       '"dest_size":-1,"id":""}';
         $this->smusher->examineResponse($aGoodError);
-        $this->assertTrue($this->smusher->isSmushed);
+        $this->assertTrue($this->smusher->isSmushed());
         $this->assertEqual('http://smush.it/results/c825409c/logo.png',
                            $this->smusher->getSmushedUrl());
 

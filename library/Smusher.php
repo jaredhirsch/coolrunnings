@@ -11,9 +11,14 @@ class Smusher
      *             if the gentle reader deems it necessary.
      * 
      * @var mixed
-     * @access public
+     * @access protected 
      */
-    public $isSmushed;
+    protected $isSmushed;
+
+    public function isSmushed()
+    {
+        return $this->isSmushed;
+    }
 
     public function smush($fileToSmush,
                                 $serviceUrl = 'http://smush.it/ws.php?img=')
