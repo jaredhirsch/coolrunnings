@@ -31,5 +31,9 @@ class Smusher
             $this->isSmushed = false;
             return;
         }
+
+        if ($responseAsArray['error'] == 'No savings') {
+            $this->isSmushed = true;
+        }
     }
 }
