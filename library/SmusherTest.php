@@ -47,5 +47,18 @@ class SmusherTest extends UnitTestCase
                            $this->smusher->getSmushedUrl());
     }
 
+    public function testIfImageSmushesSuccessfullyThenMarkAsSmushedAndSetSmushitUrl()
+    {
+        $success = '{"src":"http:\/\/smush.it\/css\/skin\/screenshot.png",' .
+                   '"src_size":2334,' .
+                   '"dest":"results\/1dab8f0e\/smush\/screenshot.png",' .
+                   '"dest_size":2261,"percent":"3.13","id":""}';
+        $this->smusher->examineResponse($success);
+        
+        $this->assertTrue($this->smusher->isSmushed());
+        $expectedUrl = 'http://smush.it/results/1dab8f0e/smush/screenshot.png';
+        $this->assertEqual($expectedUrl, 
+                           $this->smusher->getSmushedUrl());
+    }
 
 }
