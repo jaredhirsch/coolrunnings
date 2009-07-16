@@ -30,7 +30,7 @@ class SmusherTest extends UnitTestCase
         $this->assertFalse($this->smusher->isSmushed());
     }
 
-    public function testShouldMarkImageAsSmushedAndGiveSmushitImageUrlIfImageCannotBeSmushedFurther()
+    public function testIfImageCannotBeSmushedFurtherThenShouldMarkImageAsSmushedAndGiveSmushitImageUrl()
     {
         // if smush.it cannot further compress an image,
         // it throws an error. but we are still happy with
@@ -47,7 +47,7 @@ class SmusherTest extends UnitTestCase
                            $this->smusher->getSmushedUrl());
     }
 
-    public function testIfImageSmushesSuccessfullyThenMarkAsSmushedAndSetSmushitUrl()
+    public function testIfImageSmushesSuccessfullyThenShouldMarkAsSmushedAndGiveSmushitImageUrl()
     {
         $success = '{"src":"http:\/\/smush.it\/css\/skin\/screenshot.png",' .
                    '"src_size":2334,' .
