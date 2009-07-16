@@ -9,13 +9,14 @@ class SmusherTest extends UnitTestCase
     {
         error_reporting(0);
         $this->swallowErrors();
+        $this->smusher = new Smusher;
     }
 
     public function testShouldCatchExceptionIfUrlIsUnavailable()
     {
         $badUrl = 'http://example.com/asdf/';
         $badFile = 'thisFakeFileDoesNotExist.png';
-        $smush_it = new Smusher($imageToSmush = $badFile, 
+        $this->smusher->smush($imageToSmush = $badFile, 
                                 $serviceUrl = $badUrl);
         $this->assertFalse($smush_it->isSmushed);
         
@@ -26,10 +27,8 @@ class SmusherTest extends UnitTestCase
         // enable error reporting while we're writing the test
         // so we know what's breaking
         error_reporting(-1);
-        $fakeSmushit = dirname(__FILE__) . '/fixtures/';
-        $fakeSmushitContinued = 'smushitFailureResponse.png';
-        $smush_it = new Smusher($fakeSmushitContinued, $fakeSmushit);
 
+        
         $this->assertFalse($smush_it->isSmushed);
         $expected = file_get_contents($fakeSmushit . $fakeSmushitContinued);
         $this->assertEqual($expected, $smush_it->getRawResponse());
