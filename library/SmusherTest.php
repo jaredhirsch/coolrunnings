@@ -23,10 +23,15 @@ class SmusherTest extends UnitTestCase
 
     public function testShouldCatchExceptionIfSmushitReturnsJsonErrorMessage()
     {
+        // enable error reporting while we're writing the test
+        // so we know what's breaking
+        error_reporting(-1);
         $fakeSmushit = dirname(__FILE__) . '/fixtures/';
         $fakeSmushitContinued = 'smushitFailureResponse.png';
         $smush_it = new Smusher($fakeSmushit, $fakeSmushitContinued);
 
         $this->assertFalse($smush_it->isSmushed);
+        $expected = file_get_contents($fakeSmushit . $fakeSmushitContinued);
+        $this->assertEqual($expected, $smush_it->getRawResponse());
     }
 }
