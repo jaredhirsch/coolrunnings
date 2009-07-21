@@ -74,4 +74,9 @@ class AbsolutelyCool
             return $this->fileSavePath . $localFilename;
         }
     }
+
+    public function encodeSpaces($url)
+    {
+        return str_replace(' ', '%20', $url);
+    }
 }

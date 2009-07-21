@@ -287,7 +287,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         $this->assertEqual(0, $difference);
     }
 
-    public function testShouldHandleImagesWithSpacesInUrls()
+    public function testShouldHandleInputImagesWithSpacesInUrls()
     {
         // although this feels like an input filtering issue,
         // really, it requires such detailed knowledge of the
