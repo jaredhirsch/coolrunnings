@@ -307,4 +307,15 @@ class AbsolutelyCoolTest extends UnitTestCase
         $this->assertEqual('http://example.com/single%20space.png',
                     $ac->encodeSpaces('http://example.com/single space.png'));
     }
+
+    public function testShouldThrowBadInputExceptionIfInputImagesHaveBadUrls()
+    {
+        $ac = new AbsolutelyCool;
+        try {
+            $ac->getLocalCopyOfImage('http://example.jaosdijfk', 'foo');
+            $this->fail('should have failed due to opening a bad URL');
+        } catch (BadInputException $e) {
+            $this->pass('correctly throwing exception when sprite component URLs are bad');
+        }
+    }
 }
