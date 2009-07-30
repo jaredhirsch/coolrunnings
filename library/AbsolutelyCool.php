@@ -47,13 +47,18 @@ class AbsolutelyCool
                                         $bigInputArray['images']);
         $commentedSprite = $this->setComments($sprite,
                                     $bigInputArray['canvas']['comments']);
-        if($this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite)) {
-            return $this->fileSavePath . 
-                $bigInputArray['canvas']['name'] . '.png';
+        
+// request for unique image ids from steve
+// superceded by unique image dirs
+//        $imageName = $bigInputArray['canvas']['name'] . uniqid();
+
+//	if($this->saveSpriteAs($imageName, $commentedSprite))
+	if($this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite)) {
+            return $this->fileSavePath . $bigInputArray['canvas']['name'] . '.png';
         }
     }
 
-    protected $fileSavePath = '';
+    protected $fileSavePath;
 
     public function setSavePath($path)
     {
@@ -73,10 +78,5 @@ class AbsolutelyCool
         if (fputs($handle, $file)) {
             return $this->fileSavePath . $localFilename;
         }
-    }
-
-    public function encodeSpaces($url)
-    {
-        return str_replace(' ', '%20', $url);
     }
 }
