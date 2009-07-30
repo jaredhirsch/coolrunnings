@@ -21,16 +21,32 @@ class Smusher
     }
 
     public function smush($fileToSmush,
-                          $serviceUrl = 'http://smush.it/ws.php?img=')
+                          $serviceUrl = 'http://smushit.com/ws.php?img=')
     {
+        // usually we get a response in less than
+        // five seconds. maybe we can loop over
+        // this and make several attempts if it times out.
+
+        ini_set('default_socket_timeout', 2);
         try {
             $fullPath = $serviceUrl . $fileToSmush;
             $file = new SplFileObject($fullPath);
             $this->rawResponse = $file->__toString();
             $this->examineResponse();
         } catch (RuntimeException $e) {
-            $this->isSmushed = false;
+
+            //adding nested try/catch as a way of trying smushit twice
+
+	    try {
+                $fullPath = $serviceUrl . $fileToSmush;
+		$file = new SplFileObject($fullPath);
+		$this->rawResponse = $file->__toString();
+		$this->examineResponse();
+            } catch (RuntimeException $e) {
+                $this->isSmushed = false;
+            }
         }
+
     }
 
     protected $rawResponse;
@@ -52,7 +68,9 @@ class Smusher
             $this->smushedUrl = 'http://smush.it/' . $responseAsArray['src'];
         } elseif (array_key_exists('dest', $responseAsArray)) {
             $this->isSmushed = true;
-            $this->smushedUrl = 'http://smush.it/' . $responseAsArray['dest'];
+ // smushit.com returns the full path
+ //           $this->smushedUrl = 'http://smush.it/' . $responseAsArray['dest'];
+            $this->smushedUrl = $responseAsArray['dest'];
         } else {
             $this->isSmushed = false;
         }
