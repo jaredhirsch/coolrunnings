@@ -286,36 +286,4 @@ class AbsolutelyCoolTest extends UnitTestCase
         $difference = $comparisonArray[1];
         $this->assertEqual(0, $difference);
     }
-
-    public function testShouldHandleInputImagesWithSpacesInUrls()
-    {
-        // although this feels like an input filtering issue,
-        // really, it requires such detailed knowledge of the
-        // input array's structure that it's too much coupling
-        // to put it in the front controller.
-
-        // this all goes down to fopen() choking on URLs with
-        // non-encoded spaces in them.
-
-        // once we refactor input object to ArrayObject or
-        // similar, this will go in there. enough comments already...
-
-        
-        // I am lacking brilliance tonight. so we'll make a public method...
-
-        $ac = new AbsolutelyCool;
-        $this->assertEqual('http://example.com/single%20space.png',
-                    $ac->encodeSpaces('http://example.com/single space.png'));
-    }
-
-    public function testShouldThrowBadInputExceptionIfInputImagesHaveBadUrls()
-    {
-        $ac = new AbsolutelyCool;
-        try {
-            $ac->getLocalCopyOfImage('http://example.jaosdijfk', 'foo');
-            $this->fail('should have failed due to opening a bad URL');
-        } catch (BadInputException $e) {
-            $this->pass('correctly throwing exception when sprite component URLs are bad');
-        }
-    }
 }
