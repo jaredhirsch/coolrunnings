@@ -50,6 +50,6 @@ class FrontController
     public function sendResponse($response)
     {
         header('Content-type: application/json');
-        echo $response;
+        echo 'var coolRunnings = ' . $response;
     }
 }
