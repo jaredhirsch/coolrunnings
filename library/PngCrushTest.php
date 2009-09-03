@@ -10,8 +10,10 @@ class PngCrushTest extends UnitTestCase
     {
         $crusher = new PngCrush;
         $testImageDir = dirname(__FILE__) . '/pngcrush-fixtures/';
-        $crusher->crush($inputFile = $testImageDir . 'purple.png',
-                        $outputFile = $testImageDir . 'purple-test-output.png');
+        $inputFile = $testImageDir . 'purple.png';
+        $outputFile = $testImageDir . 'purple-test-output.png';
+
+        $crusher->crush($inputFile, $outputFile);
 
     }
 }
