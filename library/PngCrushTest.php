@@ -29,4 +29,11 @@ class PngCrushTest extends UnitTestCase
         $this->assertTrue($outputInfo->isFile());
         $this->assertTrue($inputInfo->getSize() >= $outputInfo->getSize()); 
     }
+
+    public function testMissingInputFileShouldThrowException()
+    {
+        $crusher = new PngCrush;
+        $this->expectException();
+        $crusher->crush('/dev/null/foo', '/tmp/foo.png');
+    }
 }
