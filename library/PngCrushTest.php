@@ -13,6 +13,15 @@ class PngCrushTest extends UnitTestCase
         $inputFile = $testImageDir . 'purple.png';
         $outputFile = $testImageDir . 'purple-test-output.png';
 
+        // if the file exists, delete it:
+        try {
+            $fileCheck = new SplFileInfo($outputFile);
+            $fileCheck->isFile();
+            // if no RuntimeException was thrown, 
+            // the file exists and must be deleted.
+            unlink($outputFile);
+        } catch (RuntimeException $e) {}
+
         $crusher->crush($inputFile, $outputFile);
 
         $inputInfo  = new SplFileInfo($inputFile);
