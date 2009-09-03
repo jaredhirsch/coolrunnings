@@ -2,5 +2,8 @@
 
 class PngCrush
 {
-    public function crush($inputFileName, $outputFileName) {}
+    public function crush($inputFileName, $outputFileName) 
+    {
+        passthru("pngcrush -force $inputFileName $outputFileName");
+    }
 }
