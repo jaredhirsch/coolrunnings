@@ -36,4 +36,22 @@ class PngCrushTest extends UnitTestCase
         $this->expectException();
         $crusher->crush('/dev/null/foo', '/tmp/foo.png');
     }
+
+    public function testUnwritableOutputFileShouldThrowException()
+    {
+        $crusher = new PngCrush;
+        $testImageDir = dirname(__FILE__) . '/pngcrush-fixtures/';
+        $dummyInputFile = $testImageDir . 'purple.png';
+
+        // I don't think anyone would really
+        // run this as root, but let's test
+        // to avoid trashing anyone's system
+        $specialDir = new SplFileInfo('/var/log');
+        if ($specialDir->isWritable()) {
+            $this->fail('you should not run this test as root!');
+        }
+
+        $this->expectException();
+        $crusher->crush($dummyInputFile, '/var/log/foo.png');
+    }
 }
