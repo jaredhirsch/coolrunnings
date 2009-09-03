@@ -5,6 +5,7 @@ class PngCrush
     public function crush($inputFileName, $outputFileName) 
     {
         $this->checkFileExists($inputFileName);
+        $this->checkDirIsWritable($outputFileName);
 
         // don't want the output, thx
         ob_start();
@@ -17,6 +18,16 @@ class PngCrush
         $fileInfo = new SplFileInfo($file);
         if (!$fileInfo->isFile()) {
             throw new RuntimeException("file $file does not exist");
+        }
+    }
+
+    private function checkDirIsWritable($file)
+    {
+        $fileInfo = new SplFileInfo($file);
+        $path = $fileInfo->getPath();
+        $pathInfo = new SplFileInfo($path);
+        if (!$pathInfo->isWritable()) {
+            throw new RuntimeException("$path is not writable");
         }
     }
 }
