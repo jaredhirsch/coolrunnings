@@ -27,6 +27,6 @@ class PngCrushTest extends UnitTestCase
         $inputInfo  = new SplFileInfo($inputFile);
         $outputInfo = new SplFileInfo($outputFile);
         $this->assertTrue($outputInfo->isFile());
-        //$this->assertTrue($inputInfo->getSize() <= $outputInfo->getSize()); 
+        $this->assertTrue($inputInfo->getSize() >= $outputInfo->getSize()); 
     }
 }
