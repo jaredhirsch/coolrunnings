@@ -9,7 +9,8 @@ class PngCrush
 
         // don't want the output, thx
         ob_start();
-        passthru("pngcrush -force $inputFileName $outputFileName");
+        // thx to Stoyan
+        passthru("pngcrush -rem alla -brute -reduce $inputFileName $outputFileName");
         $pngcrushResults = ob_get_clean();
     }
 
