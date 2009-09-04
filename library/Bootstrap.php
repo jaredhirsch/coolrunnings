@@ -4,7 +4,6 @@ ob_start();
 
 require_once 'FrontController.php';
 require_once 'AbsolutelyCool.php';
-require_once 'Smusher.php';
 // I am reasonably sure this is how it works:
 
     // given a front controller
@@ -51,18 +50,6 @@ require_once 'Smusher.php';
 
     // replace local with web path, stuff into array, 
     $webPathAsArray = $fc->constructResponse($localSpritePath);
-
-// Obviously this should be a smushing method
-// inside AC, or, we set up an event-based
-// thing to decouple the image optimizer from
-// the sprite generator itself
-
-	// next, send to smush.it
- 	$smush = new Smusher;
- 	$smush->smush($webPathAsArray['url']);
- 	if ($smush->isSmushed()) {
- 		$webPathAsArray['url'] = $smush->getSmushedUrl();
- 	}
 
 // here FC should decide what to do
 // based on the format of the response.
