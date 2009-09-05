@@ -48,14 +48,14 @@ require_once 'AbsolutelyCool.php';
     $requestAsArray = $fc->decodeRequest($_GET['absolute']);
     $localSpritePath = $fc->dispatch($requestAsArray);
 
-    // replace local with web path, stuff into array, 
-    $webPathAsArray = $fc->constructResponse($localSpritePath);
 
 // here FC should decide what to do
 // based on the format of the response.
 // This should be pushed into FC.
 
     if ($_GET['format'] == 'json') {
+        // replace local with web path, stuff into array, 
+        $webPathAsArray = $fc->constructResponse($localSpritePath);
         // convert into json, and emit!
         $webPathAsJson = $fc->responseAsJson($webPathAsArray);
         // trash the buffer
