@@ -42,21 +42,11 @@ class BootstrapTest extends UnitTestCase
         $jsonOutput = substr($coolRunningsOutput, 19);
         $arrayOutput = json_decode($jsonOutput, true);
         $spriteUrl = $arrayOutput['url'];
-
         
         // now we compare the generated image with our test image.
         // md5 is simple and expedient. but check that the file 
         // exists and is accessible.
         $testImageUrl = 'http://localhost/coolrunnings/public_images/ghosts-a-plenty.png';
-        try {
-            $originalErrorReportingLevel = ini_get('error_reporting');
-            error_reporting(0);
-            $testImage = new SplFileObject($testImageUrl);
-            $error_reporting($originalErrorReportingLevel);
-        } catch (Exception $e) {
-            $this->fail('test image is not accessible and is needed for sprite comparison');
-            return;
-        }
-        $this->assertEqual(md5($spriteUrl), md5($testImage));
+        $this->assertEqual(md5_file($spriteUrl), md5_file($testImageUrl));
     }
 }
