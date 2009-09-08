@@ -73,6 +73,22 @@ class Bootstrap
 
     private $localSpritePath;
 
+
+    public function optimizeSprite()
+    {
+        $localSpritePath = $this->localSpritePath;
+
+            // now inserting pngcrush wrapper
+            require_once 'PngCrush.php';
+            $crusher = new PngCrush;
+            try {
+                $crusher->crush($localSpritePath, $localSpritePath . ".crushed");
+                // if crushing succeeds, overwrite original file
+                copy($localSpritePath. ".crushed", $localSpritePath);
+                unlink($localSpritePath. ".crushed");
+            } catch (Exception $e) {}
+    }
+
     public function run()
     {
         $this->initializeFrontControllerAndSpriteGenerator();
@@ -83,16 +99,8 @@ class Bootstrap
         $this->processRequest();
     
         $localSpritePath = $this->localSpritePath;
-            // now inserting pngcrush wrapper
-            require_once 'PngCrush.php';
-            $crusher = new PngCrush;
-            try {
-                $crusher->crush($localSpritePath, $localSpritePath . ".crushed");
-                // if crushing succeeds, overwrite original file
-                copy($localSpritePath. ".crushed", $localSpritePath);
-                unlink($localSpritePath. ".crushed");
-            } catch (Exception $e) {}
 
+        $this->optimizeSprite();
             // replace local with web path, stuff into array, 
             $webPathAsArray = $fc->constructResponse($localSpritePath);
 
