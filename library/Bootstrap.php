@@ -8,9 +8,8 @@ require_once 'AbsolutelyCool.php';
 class Bootstrap
 {
 
-    public static function run()
+    public function initializeFrontControllerAndSpriteGenerator()
     {
-
         // I am reasonably sure this is how it works:
 
             // given a front controller
@@ -41,7 +40,12 @@ class Bootstrap
 
             $fc->setWebRoot('/var/www/html/');
             $fc->setRootUrl('http://localhost/');
+    }
 
+    public static function run()
+    {
+
+        $this->initializeFrontControllerAndSpriteGenerator();
 
         // Finally we get to the part where 
         // the front controller is translating
