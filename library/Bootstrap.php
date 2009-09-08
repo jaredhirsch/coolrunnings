@@ -18,7 +18,6 @@ class Bootstrap
         $this->initializeSpriteGenerator();
         $this->initializeFrontController();
         $this->processRequestAndGenerateSprite();
-        $this->optimizeSprite();
         $this->constructResponseAndEmit();
     }
 
@@ -79,6 +78,8 @@ class Bootstrap
             $requestAsArray = $fc->decodeRequest($_GET['absolute']);
             $localSpritePath = $fc->dispatch($requestAsArray);
         $this->localSpritePath = $localSpritePath;
+
+        $this->optimizeSprite();
     }
 
     private $localSpritePath;
