@@ -6,7 +6,7 @@ require_once 'simpletest/autorun.php';
 
 class BootstrapTest extends UnitTestCase
 {
-    public function testCanonicalExampleShouldSucceed()
+    public function testCanonicalJsonExampleShouldSucceed()
     {
         if (isset($_GET['format'])) {
             unset($_GET['format']);
