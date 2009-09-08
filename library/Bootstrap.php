@@ -54,7 +54,7 @@ class Bootstrap
         $b->run();
     }
 
-    public function processRequest()
+    public function processRequestAndGenerateSprite()
     {
         $fc = $this->frontController;
         // Finally we get to the part where 
@@ -142,7 +142,7 @@ class Bootstrap
         $fc = $this->frontController;
         $ac = $this->absolutelyCool;
 
-        $this->processRequest();
+        $this->processRequestAndGenerateSprite();
     
         $localSpritePath = $this->localSpritePath;
 
