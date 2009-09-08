@@ -32,12 +32,12 @@ class Bootstrap
 
     public function initializeFrontControllerAndSpriteGenerator()
     {
-        // I am reasonably sure this is how it works:
+            $this->initializeSpriteGenerator();
+            $this->initializeFrontController();
+    }
 
-            // given a front controller
-            
-            $fc = new FrontController;
-            
+    public function initializeSpriteGenerator()
+    {
         /*****************************************
          *
          * start by inserting an absolutelyCool
@@ -45,7 +45,7 @@ class Bootstrap
          *
          */
             $ac = new AbsolutelyCool;
-
+            
             // I guess we have to set AbsolutelyCool path separately.
             // here we introduce the random directory.
             $random = rand();
@@ -55,16 +55,24 @@ class Bootstrap
             mkdir($savePath);
             //$ac->setSavePath(dirname(dirname(__FILE__)) . '/public_images/' . $shortened . '/');
             $ac->setSavePath($savePath . '/');
+        $this->absolutelyCool = $ac;
+    }
 
+    public function initializeFrontController()
+    {
+
+            // given a front controller
+            
+            $fc = new FrontController;
+            
         // Front Controller config and stuff
-
-            $fc->setAbsolutelyCool($ac);
+            
+            $fc->setAbsolutelyCool($this->absolutelyCool);
 
             $fc->setWebRoot('/var/www/html/');
             $fc->setRootUrl('http://localhost/');
 
         $this->frontController = $fc;
-        $this->absolutelyCool = $ac;
     }
 
     private $frontController;
