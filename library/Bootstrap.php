@@ -7,6 +7,28 @@ require_once 'AbsolutelyCool.php';
 
 class Bootstrap
 {
+    public static function startup()
+    {
+        $b = new Bootstrap;
+        $b->run();
+    }
+
+    public function run()
+    {
+        $this->initializeFrontControllerAndSpriteGenerator();
+
+        $fc = $this->frontController;
+        $ac = $this->absolutelyCool;
+
+        $this->processRequestAndGenerateSprite();
+    
+        $localSpritePath = $this->localSpritePath;
+
+        $this->optimizeSprite();
+
+        $this->constructResponseAndEmit();
+
+    }
 
     public function initializeFrontControllerAndSpriteGenerator()
     {
@@ -47,12 +69,6 @@ class Bootstrap
 
     private $frontController;
     private $absolutelyCool;
-
-    public static function startup()
-    {
-        $b = new Bootstrap;
-        $b->run();
-    }
 
     public function processRequestAndGenerateSprite()
     {
@@ -133,23 +149,6 @@ class Bootstrap
                 header("Content-Type: image/png");
                 echo $imz;
             }
-    }
-
-    public function run()
-    {
-        $this->initializeFrontControllerAndSpriteGenerator();
-
-        $fc = $this->frontController;
-        $ac = $this->absolutelyCool;
-
-        $this->processRequestAndGenerateSprite();
-    
-        $localSpritePath = $this->localSpritePath;
-
-        $this->optimizeSprite();
-
-        $this->constructResponseAndEmit();
-
     }
 }
 
