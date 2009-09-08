@@ -15,7 +15,8 @@ class Bootstrap
 
     public function run()
     {
-        $this->initializeFrontControllerAndSpriteGenerator();
+        $this->initializeSpriteGenerator();
+        $this->initializeFrontController();
 
         $fc = $this->frontController;
         $ac = $this->absolutelyCool;
@@ -28,12 +29,6 @@ class Bootstrap
 
         $this->constructResponseAndEmit();
 
-    }
-
-    public function initializeFrontControllerAndSpriteGenerator()
-    {
-            $this->initializeSpriteGenerator();
-            $this->initializeFrontController();
     }
 
     public function initializeSpriteGenerator()
