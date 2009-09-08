@@ -41,18 +41,10 @@ class Bootstrap
 
     public function initializeFrontController()
     {
-
-        // given a front controller
-        
         $fc = new FrontController;
-        
-        // Front Controller config and stuff
-            
         $fc->setAbsolutelyCool($this->absolutelyCool);
-
         $fc->setWebRoot('/var/www/html/');
         $fc->setRootUrl('http://localhost/');
-
         $this->frontController = $fc;
     }
 
