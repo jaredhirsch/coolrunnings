@@ -95,11 +95,7 @@ class Bootstrap
         // This should be pushed into FC.
 
         if ($_GET['format'] == 'json') {
-            // convert into json, and emit!
-            $webPathAsJson = $fc->responseAsJson($webPathAsArray);
-            // trash the buffer
-            ob_end_clean();
-            $fc->sendResponse($webPathAsJson);
+            $this->emitJsonResponse($webPathAsArray);
         } elseif ($_GET['format'] == 'image') {
             // trash the buffer
             ob_end_clean();
@@ -126,6 +122,15 @@ class Bootstrap
             echo $imz;
         }
     }
+        public function emitJsonResponse($webPathAsArray)
+        {
+            $fc = $this->frontController;
+            // convert into json, and emit!
+            $webPathAsJson = $fc->responseAsJson($webPathAsArray);
+            // trash the buffer
+            ob_end_clean();
+            $fc->sendResponse($webPathAsJson);
+        }
 }
 
 Bootstrap::startup();
