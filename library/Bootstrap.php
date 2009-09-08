@@ -17,18 +17,9 @@ class Bootstrap
     {
         $this->initializeSpriteGenerator();
         $this->initializeFrontController();
-
-        $fc = $this->frontController;
-        $ac = $this->absolutelyCool;
-
         $this->processRequestAndGenerateSprite();
-    
-        $localSpritePath = $this->localSpritePath;
-
         $this->optimizeSprite();
-
         $this->constructResponseAndEmit();
-
     }
 
     public function initializeSpriteGenerator()
