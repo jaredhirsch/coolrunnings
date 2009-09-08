@@ -54,32 +54,21 @@ class Bootstrap
     public function processRequestAndGenerateSprite()
     {
         $fc = $this->frontController;
-        // Finally we get to the part where 
-        // the front controller is translating
-        // HTTP input into a form ac can understand
-
-        // all these steps should be pushed from
-        // bootstrap into some kind of FC "dispatch" method
-
-        // now: get request and funnel to AC to generate sprite
-        // ac returns path where sprite was saved
         $requestAsArray = $fc->decodeRequest($_GET['absolute']);
         $localSpritePath = $fc->dispatch($requestAsArray);
         $this->localSpritePath = $localSpritePath;
-
         $this->optimizeSprite();
     }
 
     private $localSpritePath;
 
-
     public function optimizeSprite()
     {
         $localSpritePath = $this->localSpritePath;
 
-        // now inserting pngcrush wrapper
         require_once 'PngCrush.php';
         $crusher = new PngCrush;
+
         try {
             $crusher->crush($localSpritePath, $localSpritePath . ".crushed");
             // if crushing succeeds, overwrite original file
