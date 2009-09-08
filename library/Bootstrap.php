@@ -23,23 +23,17 @@ class Bootstrap
 
     public function initializeSpriteGenerator()
     {
-        /*****************************************
-         *
-         * start by inserting an absolutelyCool
-         * instance into the front controller
-         *
-         */
-            $ac = new AbsolutelyCool;
-            
-            // I guess we have to set AbsolutelyCool path separately.
-            // here we introduce the random directory.
-            $random = rand();
-            $hashed = md5($random);
-            $shortened = substr($hashed, 1, 10);
-            $savePath = dirname(dirname(__FILE__)) . '/public_images/' . $shortened;
-            mkdir($savePath);
-            //$ac->setSavePath(dirname(dirname(__FILE__)) . '/public_images/' . $shortened . '/');
-            $ac->setSavePath($savePath . '/');
+        $ac = new AbsolutelyCool;
+        
+        // I guess we have to set AbsolutelyCool path separately.
+        // here we introduce the random directory.
+        $random = rand();
+        $hashed = md5($random);
+        $shortened = substr($hashed, 1, 10);
+        $savePath = dirname(dirname(__FILE__)) . '/public_images/' . $shortened;
+        mkdir($savePath);
+        //$ac->setSavePath(dirname(dirname(__FILE__)) . '/public_images/' . $shortened . '/');
+        $ac->setSavePath($savePath . '/');
         $this->absolutelyCool = $ac;
     }
 
