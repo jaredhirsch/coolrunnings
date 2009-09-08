@@ -89,18 +89,12 @@ class Bootstrap
             } catch (Exception $e) {}
     }
 
-    public function run()
+    public function constructResponseAndEmit()
     {
-        $this->initializeFrontControllerAndSpriteGenerator();
-
         $fc = $this->frontController;
         $ac = $this->absolutelyCool;
-
-        $this->processRequest();
-    
         $localSpritePath = $this->localSpritePath;
 
-        $this->optimizeSprite();
             // replace local with web path, stuff into array, 
             $webPathAsArray = $fc->constructResponse($localSpritePath);
 
@@ -139,6 +133,23 @@ class Bootstrap
                 header("Content-Type: image/png");
                 echo $imz;
             }
+    }
+
+    public function run()
+    {
+        $this->initializeFrontControllerAndSpriteGenerator();
+
+        $fc = $this->frontController;
+        $ac = $this->absolutelyCool;
+
+        $this->processRequest();
+    
+        $localSpritePath = $this->localSpritePath;
+
+        $this->optimizeSprite();
+
+        $this->constructResponseAndEmit();
+
     }
 }
 
