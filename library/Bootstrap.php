@@ -54,13 +54,9 @@ class Bootstrap
         $b->run();
     }
 
-    public function run()
+    public function processRequest()
     {
-        $this->initializeFrontControllerAndSpriteGenerator();
-
         $fc = $this->frontController;
-        $ac = $this->absolutelyCool;
-
         // Finally we get to the part where 
         // the front controller is translating
         // HTTP input into a form ac can understand
@@ -72,7 +68,21 @@ class Bootstrap
             // ac returns path where sprite was saved
             $requestAsArray = $fc->decodeRequest($_GET['absolute']);
             $localSpritePath = $fc->dispatch($requestAsArray);
+        $this->localSpritePath = $localSpritePath;
+    }
 
+    private $localSpritePath;
+
+    public function run()
+    {
+        $this->initializeFrontControllerAndSpriteGenerator();
+
+        $fc = $this->frontController;
+        $ac = $this->absolutelyCool;
+
+        $this->processRequest();
+    
+        $localSpritePath = $this->localSpritePath;
             // now inserting pngcrush wrapper
             require_once 'PngCrush.php';
             $crusher = new PngCrush;
