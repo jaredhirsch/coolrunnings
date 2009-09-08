@@ -40,12 +40,26 @@ class Bootstrap
 
             $fc->setWebRoot('/var/www/html/');
             $fc->setRootUrl('http://localhost/');
+
+        $this->frontController = $fc;
+        $this->absolutelyCool = $ac;
     }
 
-    public static function run()
-    {
+    private $frontController;
+    private $absolutelyCool;
 
+    public static function startup()
+    {
+        $b = new Bootstrap;
+        $b->run();
+    }
+
+    public function run()
+    {
         $this->initializeFrontControllerAndSpriteGenerator();
+
+        $fc = $this->frontController;
+        $ac = $this->absolutelyCool;
 
         // Finally we get to the part where 
         // the front controller is translating
@@ -110,4 +124,4 @@ class Bootstrap
     }
 }
 
-Bootstrap::run();
+Bootstrap::startup();
