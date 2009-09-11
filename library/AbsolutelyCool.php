@@ -79,4 +79,10 @@ class AbsolutelyCool
             return $this->fileSavePath . $localFilename;
         }
     }
+
+    public function getFilesizeInBytes($file)
+    {
+        $fileInfo = new SplFileinfo($file);
+        return $fileInfo->getSize();
+    }
 }
