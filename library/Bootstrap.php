@@ -94,6 +94,10 @@ class Bootstrap
         // to the array (spriteme bug #15)
         $webPathAsArray['inputSize'] = $ac->getInputSize();
 
+        // add the size of the output sprite, in bytes,
+        // as well (spriteme bug #15 continued)
+        $webPathAsArray['outputSize'] = $ac->getSpriteSize();
+
         // here FC should decide what to do
         // based on the format of the response.
         // This should be pushed into FC.
