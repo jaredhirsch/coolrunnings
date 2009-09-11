@@ -286,4 +286,14 @@ class AbsolutelyCoolTest extends UnitTestCase
         $difference = $comparisonArray[1];
         $this->assertEqual(0, $difference);
     }
+
+    public function testShouldGetFilesize()
+    {
+        $ac = new AbsolutelyCool;
+        $localTestFile = dirname(__FILE__) . '/bluebox.png';
+        $localFileSize = 211;
+        $this->assertEqual($localFileSize,
+                           $ac->getFilesizeInBytes($localTestFile));
+        
+    }
 }
