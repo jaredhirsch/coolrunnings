@@ -113,7 +113,8 @@ class FrontControllerTest extends UnitTestCase
         ob_start();
         $fc->sendResponse($someJson);
         $responseDocument = ob_get_clean();
-        $this->assertEqual($someJson, $responseDocument);
+        $expected = 'var coolRunnings = {"foo":"bar"}';
+        $this->assertEqual($expected, $responseDocument);
     }
 
     public function testShouldConvertResponseFilesystemLinkToPublicUrl()
