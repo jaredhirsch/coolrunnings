@@ -55,6 +55,20 @@ class AbsolutelyCool
         return $this->spriteSize;
     }
 
+    protected $spriteHeight;
+
+    public function getSpriteHeight()
+    {
+        return $this->spriteHeight;
+    }
+
+    protected $spriteWidth;
+
+    public function getSpriteWidth()
+    {
+        return $this->spriteWidth;
+    }
+
     public function runnings($bigInputArray)
     {
         $blankCanvas = $this->generateCanvas($bigInputArray['canvas']);
@@ -71,6 +85,8 @@ class AbsolutelyCool
 	if($this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite)) {
             $spritePath = $this->fileSavePath . $bigInputArray['canvas']['name'] . '.png';
             $this->spriteSize = $this->getFilesizeInBytes($spritePath);
+            $this->spriteHeight = $sprite->getImageHeight();
+            $this->spriteWidth  = $sprite->getImageWidth();
             return $spritePath;
         }
     }
