@@ -96,7 +96,7 @@ class Bootstrap
 
         // add the size of the output sprite, in bytes,
         // as well (spriteme bug #15 continued)
-        $webPathAsArray['outputSize'] = $ac->getSpriteSize();
+        $webPathAsArray['outputSize'] = $ac->getFilesizeInBytes($localSpritePath);
 
         // finally, also append the output sprite dimensions
         // (spriteme bug #15 continued)
