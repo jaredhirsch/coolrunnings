@@ -115,7 +115,7 @@ class AbsolutelyCool
 
     public function getFilesizeInBytes($file)
     {
-        $fileInfo = new SplFileinfo($file);
+        $fileInfo = new SplFileInfo($file);
         return $fileInfo->getSize();
     }
 }
