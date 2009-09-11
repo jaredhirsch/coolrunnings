@@ -12,11 +12,19 @@ class AbsolutelyCool
         return $canvas;
     }
 
+    protected $totalInputSize;
+
+    public function getInputSize()
+    {
+        return $this->totalInputSize;
+    }
+
     public function generateSprite(Imagick $canvas, $allImages)
     {
         foreach ($allImages as $imageParameters) {
             $localImage = $this->getLocalCopyOfImage($imageParameters['url'],
                                                 $localTempFile = microtime() . '.png');
+            $this->totalInputSize += $this->getFilesizeInBytes($localImage);
             $imageToAdd = new Imagick($localImage);
             $canvas->compositeImage($imageToAdd, 
                                     imagick::COMPOSITE_OVER,
