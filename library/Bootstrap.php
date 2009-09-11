@@ -90,6 +90,10 @@ class Bootstrap
         // replace local with web path, stuff into array, 
         $webPathAsArray = $fc->constructResponse($localSpritePath);
 
+        // add the total size of component files, in bytes,
+        // to the array (spriteme bug #15)
+        $webPathAsArray['inputSize'] = $ac->getInputSize();
+
         // here FC should decide what to do
         // based on the format of the response.
         // This should be pushed into FC.
