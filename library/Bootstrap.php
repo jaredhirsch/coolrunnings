@@ -103,31 +103,7 @@ class Bootstrap
 
     public function emitImageResponse()
     {
-        $fc = $this->frontController;
-        $ac = $this->absolutelyCool;
-        $localSpritePath = $this->localSpritePath;
-
-        // replace local with web path, stuff into array, 
-        $webPathAsArray = $fc->constructResponse($localSpritePath);
-
-        // trash the buffer
-        ob_end_clean();
-        // make an image out of our URL
-        if (!isset($webPathAsArray['url'])) {
-            die('error, no url generated. please play again.');
-        }
-        try {
-            // get local copy of image and save
-            // over the earlier one.
-            $localLocation = $ac->getLocalCopyOfImage($webPathAsArray['url'],
-                                                      $localSpritePath);
-            // imagick needs local files. hence this whole song and dance.
-            $imz = new Imagick($localSpritePath);
-        } catch (Exception $e) {
-            die('error, image url inaccessible. err msg was ' . 
-                $e->getMessage() .
-                '. thanks, please play again.');
-        }
+        $imz = new Imagick($this->localSpritePath);
 
         // at this point, we have a real live image.
         // so display it
