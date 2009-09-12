@@ -15,9 +15,8 @@ class Bootstrap
 
     public function run()
     {
-
-        $this->frontController = $this->initializeFrontController();
-        $this->frontController->processRequestAndGenerateSprite($_GET['absolute']);
+        $fc = new FrontController;
+        $fc->run();
     }
 
     public function initializeFrontController()
