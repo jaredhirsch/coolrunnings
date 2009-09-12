@@ -60,6 +60,24 @@ class FrontController
         header("Content-Type: image/png");
         echo $imz;
     }
+
+    public function optimizeSprite($localSpritePath)
+    {
+        require_once 'PngCrush.php';
+        $crusher = new PngCrush;
+
+        try {
+            $crusher->crush($localSpritePath, $localSpritePath . ".crushed");
+            
+            // if crushing succeeds, overwrite original file
+            // if not, an exception will be thrown, and these
+            //   overwriting commands won't be executed
+            
+            copy($localSpritePath. ".crushed", $localSpritePath);
+            unlink($localSpritePath. ".crushed");
+        } catch (Exception $e) {}
+    }
+
     
     protected $absolutelyCool;
 
