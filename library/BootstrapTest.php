@@ -46,7 +46,7 @@ class BootstrapTest extends UnitTestCase
         // now we compare the generated image with our test image.
         // md5 is simple and expedient. but check that the file 
         // exists and is accessible.
-        $testImageUrl = dirname(__FILE__) . '/bootstrap-fixtures/ghosts-a-plenty.png';
+        $testImageUrl = dirname(__FILE__) . '/fixtures/redbox-bluebox.png';
         $this->assertEqual(md5_file($spriteUrl), md5_file($testImageUrl));
     }
 }
