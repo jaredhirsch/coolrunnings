@@ -50,42 +50,4 @@ class BootstrapTest extends UnitTestCase
         $this->assertEqual(md5_file($spriteUrl), md5_file($testImageUrl));
     }
 
-    public function testCanonicalImageExampleShouldSucceed()
-    {
-        if (isset($_GET['format'])) {
-            unset($_GET['format']);
-        }
-        if (isset($_GET['absolute'])) {
-            unset($_GET['absolute']);
-        }
-
-        $_GET['format'] = 'image';
-        $_GET['absolute'] = '
-{"canvas":
-    {"name":"redbox-bluebox",
-    "height":200,
-    "width": 200, 
-    "background-color":"none",
-    "comments":" "},
-"images":[{"url":"fixtures/redbox.png",
-        "top":10, 
-        "left":10},
-       {"url":"fixtures/bluebox.png",
-        "top":10,
-        "left":63}]}';
-
-        ob_start();
-        require_once 'Bootstrap.php';
-        $coolRunningsOutput = ob_get_clean();
-
-        // here, we're handed the output directly.
-        // so save it to a file:
-        file_put_contents('fixtures/image-output.png', $coolRunningsOutput);
-        
-        // now we compare the generated image with our test image.
-        // md5 is simple and expedient. but check that the file 
-        // exists and is accessible.
-        $testImageUrl = dirname(__FILE__) . '/fixtures/redbox-bluebox.png';
-        $this->assertEqual(md5_file('fixtures/image-output.png'), md5_file($testImageUrl));
-    }
 }
