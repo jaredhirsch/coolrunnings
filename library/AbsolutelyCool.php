@@ -15,11 +15,6 @@ class AbsolutelyCool
         $commentedSprite = $this->setComments($sprite,
                                     $bigInputArray['canvas']['comments']);
         
-// request for unique image ids from steve
-// superceded by unique image dirs
-//        $imageName = $bigInputArray['canvas']['name'] . uniqid();
-
-//	if($this->saveSpriteAs($imageName, $commentedSprite))
 	if($this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite)) {
             $spritePath = $this->fileSavePath . $bigInputArray['canvas']['name'] . '.png';
             $this->spriteSize = $this->getFilesizeInBytes($spritePath);
