@@ -34,13 +34,6 @@ class AbsolutelyCool
         return $canvas;
     }
 
-    protected $totalInputSize;
-
-    public function getInputSize()
-    {
-        return $this->totalInputSize;
-    }
-
     public function generateSprite(Imagick $canvas, $allImages)
     {
         foreach ($allImages as $imageParameters) {
@@ -57,6 +50,14 @@ class AbsolutelyCool
         }
 
         return $canvas;
+    }
+
+
+    protected $totalInputSize;
+
+    public function getInputSize()
+    {
+        return $this->totalInputSize;
     }
 
     public function setComments(Imagick $canvas, $comments)
@@ -103,12 +104,15 @@ class AbsolutelyCool
     {
         $this->fileSavePath = $path;
     }
+
     public function saveSpriteAs($filename, Imagick $sprite)
     {
         $filename = $this->fileSavePath . $filename . '.png';
         return $sprite->writeImage($filename);
     }
 
+    // the file_get_contents serial looping is going to
+    // be replaced with a parallel cURL download thing.
     public function getLocalCopyOfImage($url, $localFilename)
     {
         $file = file_get_contents($url);
