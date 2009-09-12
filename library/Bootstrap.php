@@ -18,7 +18,7 @@ class Bootstrap
         $this->initializeSpriteGenerator();
         $this->initializeFrontController();
         $this->localSpritePath = $this->frontController->processRequestAndGenerateSprite($_GET['absolute']);
-        $this->constructResponseAndEmit();
+        $this->frontController->constructResponseAndEmit($this->localSpritePath);
     }
 
     public function initializeSpriteGenerator()
