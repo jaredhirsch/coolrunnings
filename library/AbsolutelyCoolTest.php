@@ -218,8 +218,11 @@ class AbsolutelyCoolTest extends UnitTestCase
 
         $ac = new AbsolutelyCool;
         $ac->setSavePath($testFilePath);
-        $this->assertTrue($ac->saveSpriteAs('testfile', 
-                                new Imagick('fixtures/bluebox.png')));
+        try {
+            $ac->saveSpriteAs('testfile', new Imagick('fixtures/bluebox.png'));
+        } catch (RuntimeException $e) {
+            $this->fail();
+        }
 
         $this->assertTrue(file_exists($testFile));
 
