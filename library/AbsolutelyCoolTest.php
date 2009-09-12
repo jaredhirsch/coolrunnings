@@ -61,6 +61,7 @@ class AbsolutelyCoolTest extends UnitTestCase
                         'background-color' => 'red');
 
         $ac = new AbsolutelyCool;
+        $ac->setSavePath('fixtures/');
         $redCanvas = $ac->generateCanvas($redBox);
 
         $blueImageParameters = array('url' => 'fixtures/bluebox.png',
@@ -91,6 +92,7 @@ class AbsolutelyCoolTest extends UnitTestCase
                               'width'  => 100,
                               'background-color' => 'red');
         $ac = new AbsolutelyCool;
+        $ac->setSavePath('fixtures/');
         $redRectangleCanvas = $ac->generateCanvas($redRectangle);
         
         $blueBox = array('url' => 'fixtures/bluebox.png',
@@ -277,4 +279,5 @@ class AbsolutelyCoolTest extends UnitTestCase
                            $ac->getFilesizeInBytes($localTestFile));
         
     }
+
 }
