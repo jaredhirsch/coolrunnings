@@ -180,6 +180,12 @@ class AbsolutelyCoolTest extends UnitTestCase
         $spriteSavePath = dirname(__FILE__) . '/test_images/';
         $absolutelyCool->setSavePath($spriteSavePath);
         
+    // todo: this was an awful decision. refactor.
+    // why wouldn't the main sprite-generating method
+    // at least return the path to the sprite, if not
+    // the Imagick sprite itself???
+    // yeah. runnings() should return the generated sprite,
+    // or its path; or an exception if something went bad.
         // maybe ac should work by side-effects here and return itself...
         $absolutelyCool->runnings($completeArray);
 
