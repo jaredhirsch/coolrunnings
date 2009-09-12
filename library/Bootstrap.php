@@ -53,25 +53,6 @@ class Bootstrap
 
     private $localSpritePath;
 
-    public function optimizeSprite()
-    {
-        $localSpritePath = $this->localSpritePath;
-
-        require_once 'PngCrush.php';
-        $crusher = new PngCrush;
-
-        try {
-            $crusher->crush($localSpritePath, $localSpritePath . ".crushed");
-            
-            // if crushing succeeds, overwrite original file
-            // if not, an exception will be thrown, and these
-            //   overwriting commands won't be executed
-            
-            copy($localSpritePath. ".crushed", $localSpritePath);
-            unlink($localSpritePath. ".crushed");
-        } catch (Exception $e) {}
-    }
-
     public function constructResponseAndEmit()
     {
         $fc = $this->frontController;
