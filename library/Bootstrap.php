@@ -15,10 +15,12 @@ class Bootstrap
 
     public function run()
     {
+        $fc = $this->frontController;
+
         $this->initializeSpriteGenerator();
         $this->initializeFrontController();
-        $this->localSpritePath = $this->frontController->processRequestAndGenerateSprite($_GET['absolute']);
-        $this->frontController->constructResponseAndEmit($this->localSpritePath);
+        $this->localSpritePath = $fc->processRequestAndGenerateSprite($_GET['absolute']);
+        $fc->constructResponseAndEmit($this->localSpritePath);
     }
 
     public function initializeSpriteGenerator()
