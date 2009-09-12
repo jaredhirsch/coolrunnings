@@ -57,7 +57,7 @@ class Bootstrap
         $requestAsArray = $fc->decodeRequest($_GET['absolute']);
         $localSpritePath = $fc->dispatch($requestAsArray);
         $this->localSpritePath = $localSpritePath;
-        $this->optimizeSprite();
+        $fc->optimizeSprite($localSpritePath);
     }
 
     private $localSpritePath;
