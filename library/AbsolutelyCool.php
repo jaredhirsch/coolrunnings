@@ -4,6 +4,31 @@
 
 class AbsolutelyCool
 {
+    // not really a good idea to base the API on
+    // a bad pun: coolRunnings, so why not AbsolutelyCool->runnings()?
+    // but here we are. I'll refactor this later.
+    public function runnings($bigInputArray)
+    {
+        $blankCanvas = $this->generateCanvas($bigInputArray['canvas']);
+        $sprite = $this->generateSprite($blankCanvas, 
+                                        $bigInputArray['images']);
+        $commentedSprite = $this->setComments($sprite,
+                                    $bigInputArray['canvas']['comments']);
+        
+// request for unique image ids from steve
+// superceded by unique image dirs
+//        $imageName = $bigInputArray['canvas']['name'] . uniqid();
+
+//	if($this->saveSpriteAs($imageName, $commentedSprite))
+	if($this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite)) {
+            $spritePath = $this->fileSavePath . $bigInputArray['canvas']['name'] . '.png';
+            $this->spriteSize = $this->getFilesizeInBytes($spritePath);
+            $this->spriteHeight = $sprite->getImageHeight();
+            $this->spriteWidth  = $sprite->getImageWidth();
+            return $spritePath;
+        }
+    }
+
     public function generateCanvas($canvasParameters)
     {
         $canvas = new Imagick();
@@ -75,28 +100,6 @@ class AbsolutelyCool
     public function getSpriteWidth()
     {
         return $this->spriteWidth;
-    }
-
-    public function runnings($bigInputArray)
-    {
-        $blankCanvas = $this->generateCanvas($bigInputArray['canvas']);
-        $sprite = $this->generateSprite($blankCanvas, 
-                                        $bigInputArray['images']);
-        $commentedSprite = $this->setComments($sprite,
-                                    $bigInputArray['canvas']['comments']);
-        
-// request for unique image ids from steve
-// superceded by unique image dirs
-//        $imageName = $bigInputArray['canvas']['name'] . uniqid();
-
-//	if($this->saveSpriteAs($imageName, $commentedSprite))
-	if($this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite)) {
-            $spritePath = $this->fileSavePath . $bigInputArray['canvas']['name'] . '.png';
-            $this->spriteSize = $this->getFilesizeInBytes($spritePath);
-            $this->spriteHeight = $sprite->getImageHeight();
-            $this->spriteWidth  = $sprite->getImageWidth();
-            return $spritePath;
-        }
     }
 
     protected $fileSavePath;
