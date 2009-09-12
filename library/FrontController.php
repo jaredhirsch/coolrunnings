@@ -33,7 +33,7 @@ class FrontController
         return array('url' => $filteredResponse);
     }
 
-    public function emitJsonResponse($webPathAsArray)
+    public function emitJsonResponse($webPathAsArray, $localSpritePath)
     {
         $ac = $this->absolutelyCool;
 

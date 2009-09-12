@@ -95,7 +95,7 @@ class Bootstrap
         // This should be pushed into FC.
 
         if ($_GET['format'] == 'json') {
-            $this->emitJsonResponse($webPathAsArray);
+            $fc->emitJsonResponse($webPathAsArray, $localSpritePath);
         } elseif ($_GET['format'] == 'image') {
             // trash the buffer
             ob_end_clean();
