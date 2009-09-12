@@ -86,6 +86,19 @@ class FrontController
         
         return $localSpritePath;
     }
+
+    public function constructResponseAndEmit($localSpritePath)
+    {
+        // replace local with web path, stuff into array, 
+        $webPathAsArray = $this->constructResponse($localSpritePath);
+
+        if ($_GET['format'] == 'json') {
+            $this->emitJsonResponse($webPathAsArray, $localSpritePath);
+        } elseif ($_GET['format'] == 'image') {
+            $this->emitImageResponse($localSpritePath);
+        }
+    }
+
     
     protected $absolutelyCool;
 
