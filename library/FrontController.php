@@ -83,8 +83,7 @@ class FrontController
         $requestAsArray = $this->decodeRequest($request);
         $localSpritePath = $this->dispatch($requestAsArray);
         $this->optimizeSprite($localSpritePath);
-        
-        return $localSpritePath;
+        $this->constructResponseAndEmit($localSpritePath);        
     }
 
     public function constructResponseAndEmit($localSpritePath)

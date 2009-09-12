@@ -17,9 +17,7 @@ class Bootstrap
     {
 
         $this->frontController = $this->initializeFrontController();
-        $fc = $this->frontController;
-        $this->localSpritePath = $fc->processRequestAndGenerateSprite($_GET['absolute']);
-        $fc->constructResponseAndEmit($this->localSpritePath);
+        $this->frontController->processRequestAndGenerateSprite($_GET['absolute']);
     }
 
     public function createRandomDirectory()
