@@ -52,6 +52,17 @@ class AbsolutelyCool
         return $canvas;
     }
 
+    // the file_get_contents serial looping is going to
+    // be replaced with a parallel cURL download thing.
+    public function getLocalCopyOfImage($url, $localFilename)
+    {
+        $file = file_get_contents($url);
+        $completeLocalPath = $this->fileSavePath . $localFilename;
+        $handle = fopen($completeLocalPath, 'w');
+        if (fputs($handle, $file)) {
+            return $this->fileSavePath . $localFilename;
+        }
+    }
 
     protected $totalInputSize;
 
@@ -109,18 +120,6 @@ class AbsolutelyCool
     {
         $filename = $this->fileSavePath . $filename . '.png';
         return $sprite->writeImage($filename);
-    }
-
-    // the file_get_contents serial looping is going to
-    // be replaced with a parallel cURL download thing.
-    public function getLocalCopyOfImage($url, $localFilename)
-    {
-        $file = file_get_contents($url);
-        $completeLocalPath = $this->fileSavePath . $localFilename;
-        $handle = fopen($completeLocalPath, 'w');
-        if (fputs($handle, $file)) {
-            return $this->fileSavePath . $localFilename;
-        }
     }
 
     public function getFilesizeInBytes($file)
