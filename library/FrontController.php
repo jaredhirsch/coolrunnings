@@ -33,6 +33,24 @@ class FrontController
         return array('url' => $filteredResponse);
     }
 
+    public function emitJsonResponse($webPathAsArray)
+    {
+        $ac = $this->absolutelyCool;
+
+        // spriteme bug #15: add input file total size, sprite 
+        // size, sprite height, sprite width to json output.
+        $webPathAsArray['inputSize'] = $ac->getInputSize();
+        $webPathAsArray['outputSize'] = $ac->getFilesizeInBytes($localSpritePath);
+        $webPathAsArray['spriteHeight'] = $ac->getSpriteHeight();
+        $webPathAsArray['spriteWidth']  = $ac->getSpriteWidth();
+
+        // convert into json, and emit!
+        $webPathAsJson = $this->responseAsJson($webPathAsArray);
+        // trash the buffer
+        ob_end_clean();
+        $this->sendResponse($webPathAsJson);
+    }
+
     public function newConstructResponse($responsePath)
     {
         $filteredResponse = str_replace($this->webRootDirectory,

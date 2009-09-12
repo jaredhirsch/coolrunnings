@@ -90,19 +90,6 @@ class Bootstrap
         // replace local with web path, stuff into array, 
         $webPathAsArray = $fc->constructResponse($localSpritePath);
 
-        // add the total size of component files, in bytes,
-        // to the array (spriteme bug #15)
-        $webPathAsArray['inputSize'] = $ac->getInputSize();
-
-        // add the size of the output sprite, in bytes,
-        // as well (spriteme bug #15 continued)
-        $webPathAsArray['outputSize'] = $ac->getFilesizeInBytes($localSpritePath);
-
-        // finally, also append the output sprite dimensions
-        // (spriteme bug #15 continued)
-        $webPathAsArray['spriteHeight'] = $ac->getSpriteHeight();
-        $webPathAsArray['spriteWidth']  = $ac->getSpriteWidth();
-
         // here FC should decide what to do
         // based on the format of the response.
         // This should be pushed into FC.
@@ -135,15 +122,25 @@ class Bootstrap
             echo $imz;
         }
     }
-        public function emitJsonResponse($webPathAsArray)
-        {
-            $fc = $this->frontController;
-            // convert into json, and emit!
-            $webPathAsJson = $fc->responseAsJson($webPathAsArray);
-            // trash the buffer
-            ob_end_clean();
-            $fc->sendResponse($webPathAsJson);
-        }
+
+    public function emitJsonResponse($webPathAsArray)
+    {
+        $fc = $this->frontController;
+        $ac = $this->absolutelyCool;
+
+        // spriteme bug #15: add input file total size, sprite 
+        // size, sprite height, sprite width to json output.
+        $webPathAsArray['inputSize'] = $ac->getInputSize();
+        $webPathAsArray['outputSize'] = $ac->getFilesizeInBytes($localSpritePath);
+        $webPathAsArray['spriteHeight'] = $ac->getSpriteHeight();
+        $webPathAsArray['spriteWidth']  = $ac->getSpriteWidth();
+
+        // convert into json, and emit!
+        $webPathAsJson = $fc->responseAsJson($webPathAsArray);
+        // trash the buffer
+        ob_end_clean();
+        $fc->sendResponse($webPathAsJson);
+    }
 }
 
 Bootstrap::startup();
