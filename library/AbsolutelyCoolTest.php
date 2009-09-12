@@ -177,7 +177,7 @@ class AbsolutelyCoolTest extends UnitTestCase
 
                   // todo: refactor API when I'm fresh...
                   // at least the pun is amusing for the moment
-        $spriteSavePath = dirname(__FILE__) . '/public_images/';
+        $spriteSavePath = dirname(__FILE__) . '/test_images/';
         $absolutelyCool->setSavePath($spriteSavePath);
         
         // maybe ac should work by side-effects here and return itself...
@@ -208,8 +208,8 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testShouldWriteGeneratedSpriteToFile()
     {
-        $testFilePath = dirname(__FILE__) . '/public_images/';
-        $testFile = dirname(__FILE__) . '/public_images/testfile.png';
+        $testFilePath = dirname(__FILE__) . '/test_images/';
+        $testFile = dirname(__FILE__) . '/test_images/testfile.png';
 
         if (file_exists($testFile)) {
             unlink($testFile);
@@ -240,8 +240,8 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testShouldSaveCommentsWhenSpriteIsSaved()
     {
-        $testFilePath = dirname(__FILE__) . '/public_images/';
-        $testFile = dirname(__FILE__) . '/public_images/testfile.png';
+        $testFilePath = dirname(__FILE__) . '/test_images/';
+        $testFile = dirname(__FILE__) . '/test_images/testfile.png';
 
         if (file_exists($testFile)) {
             unlink($testFile);
