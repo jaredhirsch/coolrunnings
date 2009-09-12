@@ -63,6 +63,16 @@ class AbsolutelyCool
         }
     }
 
+    public function createRandomDirectory()
+    {
+        $random = rand();
+        $hashed = md5($random);
+        $shortened = substr($hashed, 1, 10);
+        $savePath = dirname(dirname(__FILE__)) . '/public_images/' . $shortened;
+        mkdir($savePath);
+        return $savePath;
+    }    
+
     protected $totalInputSize;
 
     public function getInputSize()
