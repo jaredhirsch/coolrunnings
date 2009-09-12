@@ -23,9 +23,7 @@ class Bootstrap
     public function initializeFrontController()
     {
         $fc = new FrontController;
-        $fc->setAbsolutelyCool(new AbsolutelyCool);
-        $fc->setWebRoot('/var/www/html/');
-        $fc->setRootUrl('http://localhost/');
+        $fc->initialize();
         return $fc;
     }
 
