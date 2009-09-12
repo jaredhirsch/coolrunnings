@@ -53,26 +53,6 @@ class Bootstrap
 
     private $localSpritePath;
 
-    public function constructResponseAndEmit()
-    {
-        $fc = $this->frontController;
-        $ac = $this->absolutelyCool;
-        $localSpritePath = $this->localSpritePath;
-
-        // replace local with web path, stuff into array, 
-        $webPathAsArray = $fc->constructResponse($localSpritePath);
-
-        // here FC should decide what to do
-        // based on the format of the response.
-        // This should be pushed into FC.
-
-        if ($_GET['format'] == 'json') {
-            $fc->emitJsonResponse($webPathAsArray, $localSpritePath);
-        } elseif ($_GET['format'] == 'image') {
-            $fc->emitImageResponse($localSpritePath);
-        }
-    }
-
 }
 
 Bootstrap::startup();
