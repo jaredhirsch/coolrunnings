@@ -7,7 +7,7 @@ class AbsolutelyCoolTest extends UnitTestCase
 {
     public function setUp()
     {
-        $this->bluebox = new Imagick('bluebox.png');
+        $this->bluebox = new Imagick('fixtures/bluebox.png');
     }
 
     public function tearDown()
@@ -63,7 +63,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         $ac = new AbsolutelyCool;
         $redCanvas = $ac->generateCanvas($redBox);
 
-        $blueImageParameters = array('url' => 'bluebox.png',
+        $blueImageParameters = array('url' => 'fixtures/bluebox.png',
                                      'top' => 0,
                                      'left' => 0);
 
@@ -93,10 +93,10 @@ class AbsolutelyCoolTest extends UnitTestCase
         $ac = new AbsolutelyCool;
         $redRectangleCanvas = $ac->generateCanvas($redRectangle);
         
-        $blueBox = array('url' => 'bluebox.png',
+        $blueBox = array('url' => 'fixtures/bluebox.png',
                          'top' => 0,
                          'left' => 0);
-        $otherBlueBox = array('url' => 'bluebox.png',
+        $otherBlueBox = array('url' => 'fixtures/bluebox.png',
                               'top' => 0,
                               'left' => 50);
 
@@ -149,7 +149,7 @@ class AbsolutelyCoolTest extends UnitTestCase
     public function testShouldBeAbleToGetAndSetCommentsOnAnExistingFile()
     {
         $ac = new AbsolutelyCool;
-        $commented = $ac->setComments(new Imagick('bluebox.png'), 
+        $commented = $ac->setComments(new Imagick('fixtures/bluebox.png'), 
                                 'comments on a blue box');
         $retrievedComment = $ac->getComments($commented);
 
@@ -168,10 +168,10 @@ class AbsolutelyCoolTest extends UnitTestCase
                               'comments' => 'IT IS YOUR BIRTHDAY, IMAGE.'),  
             
             'images' => array(
-                            array('url'  => 'bluebox.png',
+                            array('url'  => 'fixtures/bluebox.png',
                               'top'  => 0,
                               'left' => 0),
-                            array('url'  => 'redbox.png',
+                            array('url'  => 'fixtures/redbox.png',
                               'top'  => 0,
                               'left' => 0)));
 
@@ -192,7 +192,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         
         // same old image comparison deal. 
         // expect the sprite to be a red box.
-        $red = new Imagick('redbox.png');
+        $red = new Imagick('fixtures/redbox.png');
         $comparison = $red->compareImages($sprite, 
                                         imagick::METRIC_MEANSQUAREERROR);
         $imageDiffValue = $comparison[1];
@@ -219,13 +219,13 @@ class AbsolutelyCoolTest extends UnitTestCase
         $ac = new AbsolutelyCool;
         $ac->setSavePath($testFilePath);
         $this->assertTrue($ac->saveSpriteAs('testfile', 
-                                new Imagick('bluebox.png')));
+                                new Imagick('fixtures/bluebox.png')));
 
         $this->assertTrue(file_exists($testFile));
 
         // but is the saved sprite the same?
         $saved = new Imagick($testFile);
-        $original = new Imagick('bluebox.png');
+        $original = new Imagick('fixtures/bluebox.png');
         $comparisonArray = $original->compareImages($saved,
                                         imagick::METRIC_MEANSQUAREERROR);
         $imageDifferenceMetric = $comparisonArray[1];
@@ -246,7 +246,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         clearstatcache();
 
         $ac = new AbsolutelyCool;
-        $commented = $ac->setComments(new Imagick('bluebox.png'), 
+        $commented = $ac->setComments(new Imagick('fixtures/bluebox.png'), 
                                         'some silly comment');
         $ac->setSavePath($testFilePath);
         $ac->saveSpriteAs('testfile', $commented);
@@ -290,7 +290,7 @@ class AbsolutelyCoolTest extends UnitTestCase
     public function testShouldGetFilesize()
     {
         $ac = new AbsolutelyCool;
-        $localTestFile = dirname(__FILE__) . '/bluebox.png';
+        $localTestFile = 'fixtures/bluebox.png';
         $localFileSize = 211;
         $this->assertEqual($localFileSize,
                            $ac->getFilesizeInBytes($localTestFile));
