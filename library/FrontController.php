@@ -78,11 +78,13 @@ class FrontController
         } catch (Exception $e) {}
     }
 
-    public function processRequestAndGenerateSprite($request = $_GET['absolute'])
+    public function processRequestAndGenerateSprite($request)
     {
         $requestAsArray = $this->decodeRequest($request);
         $localSpritePath = $this->dispatch($requestAsArray);
         $this->optimizeSprite($localSpritePath);
+        
+        return $localSpritePath;
     }
     
     protected $absolutelyCool;
