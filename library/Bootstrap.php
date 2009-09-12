@@ -20,16 +20,6 @@ class Bootstrap
         $this->frontController->processRequestAndGenerateSprite($_GET['absolute']);
     }
 
-    public function createRandomDirectory()
-    {
-        $random = rand();
-        $hashed = md5($random);
-        $shortened = substr($hashed, 1, 10);
-        $savePath = dirname(dirname(__FILE__)) . '/public_images/' . $shortened;
-        mkdir($savePath);
-        return $savePath;
-    }    
-
     public function initializeFrontController()
     {
         $fc = new FrontController;
