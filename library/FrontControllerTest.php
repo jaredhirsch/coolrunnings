@@ -40,7 +40,7 @@ class FrontControllerTest extends UnitTestCase
 
     public function testShouldProperlyDecodeRealJsonInput()
     {
-        $expectedAsJson = '{"canvas":{"name":"my-awesome-numbered-img-123","height":50,"width":50,"background-color":"green","comments":"IT IS YOUR BIRTHDAY, IMAGE."},"images":[{"url":"bluebox.png","top":0,"left":0},{"url":"redbox.png","top":0,"left":0}]}';
+        $expectedAsJson = '{"canvas":{"name":"my-awesome-numbered-img-123","height":50,"width":50,"background-color":"green","comments":"IT IS YOUR BIRTHDAY, IMAGE."},"images":[{"url":"fixtures/bluebox.png","top":0,"left":0},{"url":"fixtures/redbox.png","top":0,"left":0}]}';
         $expectedArray = array(
             'canvas' => array('name' => 'my-awesome-numbered-img-123',
                               'height' => 50,
@@ -48,10 +48,10 @@ class FrontControllerTest extends UnitTestCase
                               'background-color' => 'green',
                               'comments' => 'IT IS YOUR BIRTHDAY, IMAGE.'),  
             'images' => array(
-                            array('url'  => 'bluebox.png',
+                            array('url'  => 'fixtures/bluebox.png',
                               'top'  => 0,
                               'left' => 0),
-                            array('url'  => 'redbox.png',
+                            array('url'  => 'fixtures/redbox.png',
                               'top'  => 0,
                               'left' => 0)));
 
@@ -69,10 +69,10 @@ class FrontControllerTest extends UnitTestCase
                               'background-color' => 'green',
                               'comments' => 'IT IS YOUR BIRTHDAY, IMAGE.'),  
             'images' => array(
-                            array('url'  => 'bluebox.png',
+                            array('url'  => 'fixtures/bluebox.png',
                               'top'  => 0,
                               'left' => 0),
-                            array('url'  => 'redbox.png',
+                            array('url'  => 'fixtures/redbox.png',
                               'top'  => 0,
                               'left' => 0)));
 
@@ -154,7 +154,7 @@ class FrontControllerTest extends UnitTestCase
 
     // now: get request and funnel to AC to generate sprite
     // ac returns path where sprite was saved
-        $expectedAsJson = '{"canvas":{"name":"my-awesome-numbered-img-123","height":50,"width":50,"background-color":"green","comments":"IT IS YOUR BIRTHDAY, IMAGE."},"images":[{"url":"bluebox.png","top":0,"left":0},{"url":"redbox.png","top":0,"left":0}]}';
+        $expectedAsJson = '{"canvas":{"name":"my-awesome-numbered-img-123","height":50,"width":50,"background-color":"green","comments":"IT IS YOUR BIRTHDAY, IMAGE."},"images":[{"url":"fixtures/bluebox.png","top":0,"left":0},{"url":"fixtures/redbox.png","top":0,"left":0}]}';
     $requestAsArray = $fc->decodeRequest($expectedAsJson);
     $localSpritePath = $fc->dispatch($requestAsArray);
 
