@@ -109,6 +109,12 @@ class FrontController
         return $this;
     }
 
+    public function run()
+    {
+        $this->frontController = $this->initializeFrontController();
+        $this->frontController->processRequestAndGenerateSprite($_GET['absolute']);
+    }
+
     
     protected $absolutelyCool;
 
