@@ -111,8 +111,8 @@ class FrontController
 
     public function run()
     {
-        $this->frontController = $this->initializeFrontController();
-        $this->frontController->processRequestAndGenerateSprite($_GET['absolute']);
+        $this->initialize();
+        $this->processRequestAndGenerateSprite($_GET['absolute']);
     }
 
     
