@@ -51,15 +51,6 @@ class Bootstrap
     private $frontController;
     private $absolutelyCool;
 
-    public function processRequestAndGenerateSprite()
-    {
-        $fc = $this->frontController;
-        $requestAsArray = $fc->decodeRequest($_GET['absolute']);
-        $localSpritePath = $fc->dispatch($requestAsArray);
-        $this->localSpritePath = $localSpritePath;
-        $fc->optimizeSprite($localSpritePath);
-    }
-
     private $localSpritePath;
 
     public function optimizeSprite()
