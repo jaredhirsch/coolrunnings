@@ -101,16 +101,6 @@ class Bootstrap
         }
     }
 
-    public function emitImageResponse()
-    {
-        $imz = new Imagick($this->localSpritePath);
-
-        // at this point, we have a real live image.
-        // so display it
-        header("Content-Type: image/png");
-        echo $imz;
-    }
-
 }
 
 Bootstrap::startup();
