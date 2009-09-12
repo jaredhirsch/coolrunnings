@@ -15,10 +15,10 @@ class Bootstrap
 
     public function run()
     {
-        $fc = $this->frontController;
 
         $this->initializeSpriteGenerator();
-        $this->initializeFrontController();
+        $this->frontController = $this->initializeFrontController();
+        $fc = $this->frontController;
         $this->localSpritePath = $fc->processRequestAndGenerateSprite($_GET['absolute']);
         $fc->constructResponseAndEmit($this->localSpritePath);
     }
@@ -26,7 +26,7 @@ class Bootstrap
     public function initializeSpriteGenerator()
     {
         $ac = new AbsolutelyCool;
-        $savePath = $this->createRandomDirectory();
+        $savePath = $ac->createRandomDirectory();
         $ac->setSavePath($savePath . '/');
         $this->absolutelyCool = $ac;
     }
@@ -47,7 +47,7 @@ class Bootstrap
         $fc->setAbsolutelyCool($this->absolutelyCool);
         $fc->setWebRoot('/var/www/html/');
         $fc->setRootUrl('http://localhost/');
-        $this->frontController = $fc;
+        return $fc;
     }
 
     private $frontController;
