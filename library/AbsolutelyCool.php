@@ -1,5 +1,7 @@
 <?php
 
+// this class is an absolute-coordinates sprite generator.
+
 class AbsolutelyCool
 {
     public function generateCanvas($canvasParameters)
