@@ -2,6 +2,32 @@
 
 class FrontController
 {
+
+    public function run()
+    {
+        $this->initialize();
+        $this->processRequestAndGenerateSprite($_GET['absolute']);
+    }
+
+    // this should actually check config,
+    // and use these settings as defaults
+    // if config is unavailable.
+    public function initialize()
+    {
+        $this->setAbsolutelyCool(new AbsolutelyCool);
+        $this->setWebRoot('/var/www/html/');
+        $this->setRootUrl('http://localhost/');
+        return $this;
+    }
+    
+    public function processRequestAndGenerateSprite($request)
+    {
+        $requestAsArray = $this->decodeRequest($request);
+        $localSpritePath = $this->dispatch($requestAsArray);
+        $this->optimizeSprite($localSpritePath);
+        $this->constructResponseAndEmit($localSpritePath);        
+    }
+
     public function decodeRequest($inputAsJson)
     {
         $inputAsJson = stripslashes($inputAsJson);
@@ -78,14 +104,6 @@ class FrontController
         } catch (Exception $e) {}
     }
 
-    public function processRequestAndGenerateSprite($request)
-    {
-        $requestAsArray = $this->decodeRequest($request);
-        $localSpritePath = $this->dispatch($requestAsArray);
-        $this->optimizeSprite($localSpritePath);
-        $this->constructResponseAndEmit($localSpritePath);        
-    }
-
     public function constructResponseAndEmit($localSpritePath)
     {
         // replace local with web path, stuff into array, 
@@ -97,25 +115,6 @@ class FrontController
             $this->emitImageResponse($localSpritePath);
         }
     }
-
-    // this should actually check config,
-    // and use these settings as defaults
-    // if config is unavailable.
-    public function initialize()
-    {
-        $this->setAbsolutelyCool(new AbsolutelyCool);
-        $this->setWebRoot('/var/www/html/');
-        $this->setRootUrl('http://localhost/');
-        return $this;
-    }
-
-    public function run()
-    {
-        $this->initialize();
-        $this->processRequestAndGenerateSprite($_GET['absolute']);
-    }
-
-    
     protected $absolutelyCool;
 
     public function setAbsolutelyCool($aCoolObject)

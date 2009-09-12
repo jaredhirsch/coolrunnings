@@ -9,27 +9,9 @@ class Bootstrap
 {
     public static function startup()
     {
-        $b = new Bootstrap;
-        $b->run();
-    }
-
-    public function run()
-    {
         $fc = new FrontController;
         $fc->run();
     }
-
-    public function initializeFrontController()
-    {
-        $fc = new FrontController;
-        $fc->initialize();
-        return $fc;
-    }
-
-    private $frontController;
-
-    private $localSpritePath;
-
 }
 
 Bootstrap::startup();
