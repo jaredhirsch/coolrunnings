@@ -123,25 +123,6 @@ class Bootstrap
         }
     }
 
-    public function emitJsonResponse($webPathAsArray)
-    {
-        $fc = $this->frontController;
-        $ac = $this->absolutelyCool;
-        $localSpritePath = $this->localSpritePath;
-
-        // spriteme bug #15: add input file total size, sprite 
-        // size, sprite height, sprite width to json output.
-        $webPathAsArray['inputSize'] = $ac->getInputSize();
-        $webPathAsArray['outputSize'] = $ac->getFilesizeInBytes($localSpritePath);
-        $webPathAsArray['spriteHeight'] = $ac->getSpriteHeight();
-        $webPathAsArray['spriteWidth']  = $ac->getSpriteWidth();
-
-        // convert into json, and emit!
-        $webPathAsJson = $fc->responseAsJson($webPathAsArray);
-        // trash the buffer
-        ob_end_clean();
-        $fc->sendResponse($webPathAsJson);
-    }
 }
 
 Bootstrap::startup();
