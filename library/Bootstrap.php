@@ -97,7 +97,7 @@ class Bootstrap
         if ($_GET['format'] == 'json') {
             $fc->emitJsonResponse($webPathAsArray, $localSpritePath);
         } elseif ($_GET['format'] == 'image') {
-            $this->emitImageResponse();
+            $fc->emitImageResponse($localSpritePath);
         }
     }
 

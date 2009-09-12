@@ -51,6 +51,16 @@ class FrontController
         $this->sendResponse($webPathAsJson);
     }
 
+    public function emitImageResponse($localSpritePath)
+    {
+        $imz = new Imagick($localSpritePath);
+
+        // at this point, we have a real live image.
+        // so display it
+        header("Content-Type: image/png");
+        echo $imz;
+    }
+    
     protected $absolutelyCool;
 
     public function setAbsolutelyCool($aCoolObject)
