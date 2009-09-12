@@ -127,6 +127,7 @@ class Bootstrap
     {
         $fc = $this->frontController;
         $ac = $this->absolutelyCool;
+        $localSpritePath = $this->localSpritePath;
 
         // spriteme bug #15: add input file total size, sprite 
         // size, sprite height, sprite width to json output.
