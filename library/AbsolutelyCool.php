@@ -15,13 +15,12 @@ class AbsolutelyCool
         $commentedSprite = $this->setComments($sprite,
                                     $bigInputArray['canvas']['comments']);
         
-	if($this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite)) {
-            $spritePath = $this->fileSavePath . $bigInputArray['canvas']['name'] . '.png';
-            $this->spriteSize = $this->getFilesizeInBytes($spritePath);
-            $this->spriteHeight = $sprite->getImageHeight();
-            $this->spriteWidth  = $sprite->getImageWidth();
-            return $spritePath;
-        }
+        $this->saveSpriteAs($bigInputArray['canvas']['name'], $commentedSprite);
+        $spritePath = $this->fileSavePath . $bigInputArray['canvas']['name'] . '.png';
+        $this->spriteSize = $this->getFilesizeInBytes($spritePath);
+        $this->spriteHeight = $sprite->getImageHeight();
+        $this->spriteWidth  = $sprite->getImageWidth();
+        return $spritePath;
     }
 
     public function generateCanvas($canvasParameters)
@@ -119,7 +118,9 @@ class AbsolutelyCool
     public function saveSpriteAs($filename, Imagick $sprite)
     {
         $filename = $this->fileSavePath . $filename . '.png';
-        return $sprite->writeImage($filename);
+        if (($sprite->writeImage($filename)) !== true) {
+            throw new RuntimeException('unable to write sprite to ' . $filename);
+        }
     }
 
     public function getFilesizeInBytes($file)
