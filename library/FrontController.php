@@ -98,6 +98,17 @@ class FrontController
         }
     }
 
+    // this should actually check config,
+    // and use these settings as defaults
+    // if config is unavailable.
+    public function initialize()
+    {
+        $this->setAbsolutelyCool(new AbsolutelyCool);
+        $this->setWebRoot('/var/www/html/');
+        $this->setRootUrl('http://localhost/');
+        return $this;
+    }
+
     
     protected $absolutelyCool;
 
