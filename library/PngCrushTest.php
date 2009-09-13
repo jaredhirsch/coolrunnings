@@ -28,6 +28,16 @@ class PngCrushTest extends UnitTestCase
         $outputInfo = new SplFileInfo($outputFile);
         $this->assertTrue($outputInfo->isFile());
         $this->assertTrue($inputInfo->getSize() >= $outputInfo->getSize()); 
+
+        // if the whole test ran OK, delete the file:
+        try {
+            $fileCheck = new SplFileInfo($outputFile);
+            $fileCheck->isFile();
+            // if no RuntimeException was thrown, 
+            // the file exists and must be deleted.
+            unlink($outputFile);
+        } catch (RuntimeException $e) {}
+
     }
 
     public function testMissingInputFileShouldThrowException()
