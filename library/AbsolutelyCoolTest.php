@@ -8,6 +8,10 @@ class AbsolutelyCoolTest extends UnitTestCase
     public function setUp()
     {
         $this->bluebox = new Imagick('fixtures/bluebox.png');
+        $this->ac = new AbsolutelyCool;
+        $this->testFilePath = dirname(__FILE__) . '/test_images/';
+        $this->ac->setSavePath($this->testFilePath);
+        $this->ac->dontAppendRandomSaveDirectory();
     }
 
     public function tearDown()
@@ -24,7 +28,7 @@ class AbsolutelyCoolTest extends UnitTestCase
                         'background-color' => 'blue',
                         'comments' => 'these comments are quite lame');
 
-        $ac = new AbsolutelyCool;
+        $ac = $this->ac;
         $outputImage = $ac->generateCanvas($output);
 
         $imageComparison = $outputImage->compareImages($this->bluebox, 
@@ -41,7 +45,7 @@ class AbsolutelyCoolTest extends UnitTestCase
                         'background-color' => 'blue',
                         'comments' => 'these comments are quite lame');
 
-        $ac = new AbsolutelyCool;
+        $ac = $this->ac;
         $outputImage = $ac->generateCanvas($output);
 
         $this->assertEqual('100', $outputImage->getImageWidth());
@@ -60,8 +64,7 @@ class AbsolutelyCoolTest extends UnitTestCase
                         'width' => '50',
                         'background-color' => 'red');
 
-        $ac = new AbsolutelyCool;
-        $ac->setSavePath('fixtures/');
+        $ac = $this->ac;
         $redCanvas = $ac->generateCanvas($redBox);
 
         $blueImageParameters = array('url' => 'fixtures/bluebox.png',
@@ -91,8 +94,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         $redRectangle = array('height' => 50,
                               'width'  => 100,
                               'background-color' => 'red');
-        $ac = new AbsolutelyCool;
-        $ac->setSavePath('fixtures/');
+        $ac = $this->ac;
         $redRectangleCanvas = $ac->generateCanvas($redRectangle);
         
         $blueBox = array('url' => 'fixtures/bluebox.png',
@@ -119,7 +121,7 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testShouldBeAbleToSetAndGetSpriteComments()
     {
-        $ac = new AbsolutelyCool;
+        $ac = $this->ac;
         $canvas = $ac->generateCanvas(array('height' => 50, 
                                             'width' => 50,
                                             'background-color' => 'black'));
@@ -133,7 +135,7 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testSetCommentsShouldReplaceNotAppend()
     {
-        $ac = new AbsolutelyCool;
+        $ac = $this->ac;
         $canvas = $ac->generateCanvas(array('height' => 50, 
                                             'width' => 50,
                                             'background-color' => 'black'));
@@ -150,7 +152,7 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testShouldBeAbleToGetAndSetCommentsOnAnExistingFile()
     {
-        $ac = new AbsolutelyCool;
+        $ac = $this->ac;
         $commented = $ac->setComments(new Imagick('fixtures/bluebox.png'), 
                                 'comments on a blue box');
         $retrievedComment = $ac->getComments($commented);
@@ -160,7 +162,7 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testShouldBeAbleToPassEverythingAtOnce()
     {
-        $absolutelyCool = new AbsolutelyCool;
+        $absolutelyCool = $this->ac;
         $completeArray = array(
 
             'canvas' => array('name' => 'spritemazing_123',
@@ -179,9 +181,6 @@ class AbsolutelyCoolTest extends UnitTestCase
 
                   // todo: refactor API when I'm fresh...
                   // at least the pun is amusing for the moment
-        $spriteSavePath = dirname(__FILE__) . '/test_images/';
-        $absolutelyCool->setSavePath($spriteSavePath);
-        
     // todo: this was an awful decision. refactor.
     // why wouldn't the main sprite-generating method
     // at least return the path to the sprite, if not
@@ -194,7 +193,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         // so we are now asserting against the sprite
         // which was saved to disk as a side effect
 
-        $sprite = new Imagick($spriteSavePath . 'spritemazing_123.png');
+        $sprite = new Imagick($this->testFilePath . '/spritemazing_123.png');
         $this->assertEqual('IT IS YOUR BIRTHDAY, IMAGE.',
                            $absolutelyCool->getComments($sprite));
         
@@ -208,16 +207,15 @@ class AbsolutelyCoolTest extends UnitTestCase
         $this->assertTrue($imageDiffValue == 0);
 
 
-        if (file_exists($spriteSavePath . 'spritemazing_123.png')) {
-            unlink($spriteSavePath . 'spritemazing_123.png');
+        if (file_exists($this->testFilePath . 'spritemazing_123.png')) {
+            unlink($this->testFilePath . 'spritemazing_123.png');
         }
                                             
     }
 
     public function testShouldWriteGeneratedSpriteToFile()
     {
-        $testFilePath = dirname(__FILE__) . '/test_images/';
-        $testFile = dirname(__FILE__) . '/test_images/testfile.png';
+        $testFile = $this->testFilePath .  '/testfile.png';
 
         if (file_exists($testFile)) {
             unlink($testFile);
@@ -225,7 +223,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         clearstatcache();
 
         $ac = new AbsolutelyCool;
-        $ac->setSavePath($testFilePath);
+        $ac->setSavePath($this->testFilePath);
         try {
             $ac->saveSpriteAs('testfile', new Imagick('fixtures/bluebox.png'));
         } catch (RuntimeException $e) {
@@ -248,8 +246,7 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testShouldSaveCommentsWhenSpriteIsSaved()
     {
-        $testFilePath = dirname(__FILE__) . '/test_images/';
-        $testFile = dirname(__FILE__) . '/test_images/testfile.png';
+        $testFile = $this->testFilePath .  '/testfile.png';
 
         if (file_exists($testFile)) {
             unlink($testFile);
@@ -259,7 +256,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         $ac = new AbsolutelyCool;
         $commented = $ac->setComments(new Imagick('fixtures/bluebox.png'), 
                                         'some silly comment');
-        $ac->setSavePath($testFilePath);
+        $ac->setSavePath($this->testFilePath);
         $ac->saveSpriteAs('testfile', $commented);
         $saved = new Imagick($testFile);
         $this->assertEqual('some silly comment',
