@@ -65,11 +65,20 @@ class AbsolutelyCool
 
     public function new_generateSprite(Imagick $canvas, $allImages)
     {
+        // first, fetch all the images into an array.
+        $localImages = array();
         foreach ($allImages as $imageParameters) {
-            $localImage = $this->getLocalCopyOfImage($imageParameters['url'],
+            $localImages[] = $this->getLocalCopyOfImage($imageParameters['url'],
                                                 $localTempFile = microtime() . '.png');
-            $this->totalInputSize += $this->getFilesizeInBytes($localImage);
-            $imageToAdd = new Imagick($localImage);
+        }
+
+        // $localImages is now an array of paths
+        // to the local copies of images to be sprited
+
+        // use the index to get what we need from localImages
+        foreach ($allImages as $i => $imageParameters) {
+            $this->totalInputSize += $this->getFilesizeInBytes($localImages[$i]);
+            $imageToAdd = new Imagick($localImages[$i]);
             $canvas->compositeImage($imageToAdd, 
                                     imagick::COMPOSITE_OVER,
                                     $xOffset = $imageParameters['left'],
