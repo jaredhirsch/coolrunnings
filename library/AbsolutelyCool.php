@@ -63,6 +63,25 @@ class AbsolutelyCool
         }
     }
 
+    public function new_generateSprite(Imagick $canvas, $allImages)
+    {
+        foreach ($allImages as $imageParameters) {
+            $localImage = $this->getLocalCopyOfImage($imageParameters['url'],
+                                                $localTempFile = microtime() . '.png');
+            $this->totalInputSize += $this->getFilesizeInBytes($localImage);
+            $imageToAdd = new Imagick($localImage);
+            $canvas->compositeImage($imageToAdd, 
+                                    imagick::COMPOSITE_OVER,
+                                    $xOffset = $imageParameters['left'],
+                                    $yOffset = $imageParameters['top']);
+            $imageToAdd->clear();
+            $imageToAdd->destroy();
+        }
+
+        return $canvas;
+    }
+
+
     public function setRandomSaveDirectory()
     {
         $dir = $this->createRandomDirectory();
