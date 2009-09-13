@@ -23,6 +23,12 @@ class AbsolutelyCool
         return $spritePath;
     }
 
+    protected $appendRandomDir = true;
+    public function dontAppendRandomSaveDirectory()
+    {
+        $this->appendRandomDir = false;
+    }
+
     public function generateCanvas($canvasParameters)
     {
         $canvas = new Imagick();
@@ -161,7 +167,9 @@ class AbsolutelyCool
 
     public function saveSpriteAs($filename, Imagick $sprite)
     {
-        $this->setRandomSaveDirectory();    
+        if ($this->appendRandomDir) {
+            $this->setRandomSaveDirectory();
+        }
         $filename = $this->fileSavePath . $filename . '.png';
         if (($sprite->writeImage($filename)) !== true) {
             throw new RuntimeException('unable to write sprite to ' . $filename);

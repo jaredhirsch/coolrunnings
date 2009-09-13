@@ -222,7 +222,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         }
         clearstatcache();
 
-        $ac = new AbsolutelyCool;
+        $ac = $this->ac;
         $ac->setSavePath($this->testFilePath);
         try {
             $ac->saveSpriteAs('testfile', new Imagick('fixtures/bluebox.png'));
@@ -253,7 +253,7 @@ class AbsolutelyCoolTest extends UnitTestCase
         }
         clearstatcache();
 
-        $ac = new AbsolutelyCool;
+        $ac = $this->ac;
         $commented = $ac->setComments(new Imagick('fixtures/bluebox.png'), 
                                         'some silly comment');
         $ac->setSavePath($this->testFilePath);
@@ -269,7 +269,7 @@ class AbsolutelyCoolTest extends UnitTestCase
 
     public function testShouldGetFilesize()
     {
-        $ac = new AbsolutelyCool;
+        $ac = $this->ac;
         $localTestFile = 'fixtures/bluebox.png';
         $localFileSize = 211;
         $this->assertEqual($localFileSize,
