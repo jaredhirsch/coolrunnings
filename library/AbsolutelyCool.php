@@ -17,6 +17,9 @@ class AbsolutelyCool
     // but here we are. I'll refactor this later.
     public function runnings($bigInputArray)
     {
+        if ($this->appendRandomDir) {
+            $this->setRandomSaveDirectory();
+        }
         $blankCanvas = $this->generateCanvas($bigInputArray['canvas']);
         $localImages = $this->downloadImages($bigInputArray['images']);
         $sprite = $this->generateSprite($blankCanvas, 
@@ -66,7 +69,7 @@ class AbsolutelyCool
         $localImages = array();
         foreach ($allImages as $imageParameters) {
             $localImages[] = $this->getLocalCopyOfImage($imageParameters['url'],
-                                                $localTempFile = microtime() . '.png');
+                                                $localTempFile = md5(microtime()) . '.png');
         }
         return $localImages;
     }
@@ -161,9 +164,6 @@ class AbsolutelyCool
 
     public function saveSpriteAs($filename, Imagick $sprite)
     {
-        if ($this->appendRandomDir) {
-            $this->setRandomSaveDirectory();
-        }
         $filename = $this->fileSavePath . $filename . '.png';
         if (($sprite->writeImage($filename)) !== true) {
             throw new RuntimeException('unable to write sprite to ' . $filename);
