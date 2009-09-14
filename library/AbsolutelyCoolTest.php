@@ -71,7 +71,10 @@ class AbsolutelyCoolTest extends UnitTestCase
                                      'top' => 0,
                                      'left' => 0);
 
-        $sprite = $ac->generateSprite($redCanvas, array($blueImageParameters));
+        $localImages = $ac->downloadImages(array($blueImageParameters));
+        $sprite = $ac->generateSprite($redCanvas, 
+                                        array($blueImageParameters),
+                                        $localImages);
         
         $imageComparison = $sprite->compareImages($this->bluebox,
                                             imagick::METRIC_MEANSQUAREERROR);
@@ -104,8 +107,10 @@ class AbsolutelyCoolTest extends UnitTestCase
                               'top' => 0,
                               'left' => 50);
 
+        $localImages = $ac->downloadImages(array($blueBox, $otherBlueBox));
         $sprite = $ac->generateSprite($redRectangleCanvas,
-                                        array($blueBox, $otherBlueBox));
+                                        array($blueBox, $otherBlueBox),
+                                        $localImages);
 
         $blueRectangle = new Imagick();
         $blueRectangle->newImage($width = 100, $height = 50, 
