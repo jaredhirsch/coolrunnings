@@ -4,6 +4,14 @@
 
 class AbsolutelyCool
 {
+
+    public function __construct()
+    {
+        // really need to move the filesystem stuff out
+        // of the sprite-generator. it's all confused in here.
+        // just need to initialize this, explicitly, somewhere.
+        $this->setSavePath(dirname(dirname(__FILE__)) . '/public_images/');
+    }
     // not really a good idea to base the API on
     // a bad pun: coolRunnings, so why not AbsolutelyCool->runnings()?
     // but here we are. I'll refactor this later.
@@ -92,7 +100,9 @@ class AbsolutelyCool
         $random = rand();
         $hashed = md5($random);
         $shortened = substr($hashed, 1, 10);
-        $savePath = dirname(dirname(__FILE__)) . '/public_images/' . $shortened . '/';
+// this assumes the base save path is '../public_images/' which 
+// defeats the point of separately setting $this->fileSavePath.
+        $savePath = $this->fileSavePath . $shortened . '/';
         mkdir($savePath);
         return $savePath;
     }    
