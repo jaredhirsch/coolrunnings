@@ -51,14 +51,19 @@ class AbsolutelyCool
         }
     }
 
-    public function generateSprite(Imagick $canvas, $allImages)
+    public function downloadImages($allImages)
     {
-        // first, fetch all the images into an array.
         $localImages = array();
         foreach ($allImages as $imageParameters) {
             $localImages[] = $this->getLocalCopyOfImage($imageParameters['url'],
                                                 $localTempFile = microtime() . '.png');
         }
+        return $localImages;
+    }
+
+    public function generateSprite(Imagick $canvas, $allImages)
+    {
+        $localImages = $this->downloadImages($allImages);
 
         // $localImages is now an array of paths
         // to the local copies of images to be sprited
