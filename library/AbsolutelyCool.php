@@ -10,8 +10,10 @@ class AbsolutelyCool
     public function runnings($bigInputArray)
     {
         $blankCanvas = $this->generateCanvas($bigInputArray['canvas']);
+        $localImages = $this->downloadImages($bigInputArray['images']);
         $sprite = $this->generateSprite($blankCanvas, 
-                                        $bigInputArray['images']);
+                                        $bigInputArray['images'],
+                                        $localImages);
         $commentedSprite = $this->setComments($sprite,
                                     $bigInputArray['canvas']['comments']);
         
@@ -61,13 +63,8 @@ class AbsolutelyCool
         return $localImages;
     }
 
-    public function generateSprite(Imagick $canvas, $allImages)
+    public function generateSprite(Imagick $canvas, $allImages, $localImages)
     {
-        $localImages = $this->downloadImages($allImages);
-
-        // $localImages is now an array of paths
-        // to the local copies of images to be sprited
-
         // use the index to get what we need from localImages
         foreach ($allImages as $i => $imageParameters) {
             $this->totalInputSize += $this->getFilesizeInBytes($localImages[$i]);
