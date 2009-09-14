@@ -39,7 +39,7 @@ class AbsolutelyCool
         return $canvas;
     }
 
-    public function generateSprite(Imagick $canvas, $allImages)
+    public function old_generateSprite(Imagick $canvas, $allImages)
     {
         foreach ($allImages as $imageParameters) {
             $localImage = $this->getLocalCopyOfImage($imageParameters['url'],
@@ -69,7 +69,7 @@ class AbsolutelyCool
         }
     }
 
-    public function new_generateSprite(Imagick $canvas, $allImages)
+    public function generateSprite(Imagick $canvas, $allImages)
     {
         // first, fetch all the images into an array.
         $localImages = array();
