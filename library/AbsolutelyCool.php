@@ -128,12 +128,6 @@ class AbsolutelyCool
         return $canvas->getImageProperty('comment');
     }
 
-    // this doesn't take png optimization into account!
-    // spriteSize calc moved temporarily to bootstrap.
-    // once we get a plugin-based optimization thing going,
-    // we'll be able to loop through plugins, then calculate
-    // the spriteSize here in the generator, where it should
-    // logically be calculated.
     protected $spriteSize;
 
     public function getSpriteSize()
