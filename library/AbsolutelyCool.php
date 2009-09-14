@@ -39,24 +39,6 @@ class AbsolutelyCool
         return $canvas;
     }
 
-    public function old_generateSprite(Imagick $canvas, $allImages)
-    {
-        foreach ($allImages as $imageParameters) {
-            $localImage = $this->getLocalCopyOfImage($imageParameters['url'],
-                                                $localTempFile = microtime() . '.png');
-            $this->totalInputSize += $this->getFilesizeInBytes($localImage);
-            $imageToAdd = new Imagick($localImage);
-            $canvas->compositeImage($imageToAdd, 
-                                    imagick::COMPOSITE_OVER,
-                                    $xOffset = $imageParameters['left'],
-                                    $yOffset = $imageParameters['top']);
-            $imageToAdd->clear();
-            $imageToAdd->destroy();
-        }
-
-        return $canvas;
-    }
-
     // the file_get_contents serial looping is going to
     // be replaced with a parallel cURL download thing.
     public function getLocalCopyOfImage($url, $localFilename)
